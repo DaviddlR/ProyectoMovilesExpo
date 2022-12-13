@@ -21,6 +21,8 @@ import { FlatList } from "react-native-gesture-handler";
 // Datos que contendrá el ListView
 const dataSource = [
     { id: 1, title: 'Reservar' },
+    { id: 2, title: 'Guardias' },
+    { id: 999}
     
 ];
 
@@ -54,6 +56,11 @@ class MainMenu extends Component {
             <Item id={item.id} title={item.title} />
         );
 
+        const separatorItem = () => {
+            return (
+                <View style={styles.separator} />
+            )
+        }
 
         return(
             <View>
@@ -61,6 +68,7 @@ class MainMenu extends Component {
                     data={dataSource}
                     renderItem={renderItem}
                     keyExtractor={item => item.id}
+                    ItemSeparatorComponent={separatorItem}
                 />
 
                 
@@ -74,11 +82,15 @@ class MainMenu extends Component {
     }
 
 
-    handleOnPress(parametro) {
-        console.log(parametro)
-        if(parametro == 1){
+    handleOnPress(idPantalla) {
+        console.log(idPantalla)
+        if(idPantalla == 1){
             console.log("Navegación hacia reservar")
             //this.props.navigation.navigate('PantallaReservas.js', {'usuario':this.state.email})
+        }
+
+        if(idPantalla == 2){
+            console.log("Navegación hacia guardias")
         }
         
         
@@ -95,7 +107,7 @@ const styles = StyleSheet.create({
       //marginTop: StatusBar.currentHeight || 0,
     },
     item: {
-      backgroundColor: 'gray',
+      backgroundColor: 'light-gray',
       padding: 20,
       marginVertical: 8,
       marginHorizontal: 16,
@@ -103,4 +115,10 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 32,
     },
+
+    separator:{
+        //width: 300,
+        height: 2,
+        backgroundColor: '#d1d1d1'
+    }
   });

@@ -34,6 +34,12 @@ class Login extends Component {
         email:"null",
         password:"null"
       }
+      // https://snack.expo.dev/ 
+      this.props.navigation.setOptions({
+        headerRight: () => (
+          <Button onPress={() => this.props.navigation.navigate('MainMenu', {'usuario':"david"}) } title="Info"/>
+        ),
+      });
     }
     
     render() {
@@ -123,7 +129,7 @@ export default Login
 const styles = StyleSheet.create({
     container: {
     // flex = 1 ????
-      backgroundColor: '#fff',
+      backgroundColor: 'light-gray',
       alignItems: 'center',
       justifyContent: 'center',
     },
