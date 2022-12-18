@@ -34,15 +34,33 @@ import  { Component } from 'react';
 import { Button} from 'react-native';
 import { FlatList } from "react-native-gesture-handler";
 
-const dataSource = require('../archivos/reservasMaterial.json');
+const dataSource = require('../archivos/reservasMaterialRealizadas.json');
 
 class MisReservasMaterial extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
         // data: dataSource[this.props.route.params.usuario]
-            data: dataSource['mperez@gmail.com'],
+           data: this.validarFecha(dataSource['mperez@gmail.com']),
         };
+    }
+
+    validarFecha(data){
+       let dataAux = data
+       console.log(dataAux)
+       for (i in dataAux){
+            console.log(dataAux[i])
+            if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > dataAux[i]['Dia'] ){
+                dataAux.splice(i,1)
+            } else{
+                if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == dataAux[i]['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > dataAux[i]["Hora"].split("-")[1]){
+                    dataAux.splice(i,1)
+                }
+            }
+       }
+       console.log(dataAux)
+       return dataAux
     }
 
 
@@ -53,7 +71,7 @@ class MisReservasMaterial extends Component {
                 <Text style={styles.title}>{Material}</Text>
                 <Text style={styles.subtitle}> Dia: {Dia}</Text>
                 <Text style={styles.subtitle}> Hora: {Hora}</Text>
-                <Text style={styles.subtitle}> Unidad/es: {Cantidad}</Text>
+                <Text style={styles.subtitle}> Unidades: {Cantidad}</Text>
 
                 <TouchableOpacity
                               style={styles.cancelButton}
