@@ -2,12 +2,8 @@ import { Component } from "react"
 
 import React, { useState } from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   TextInput,
   TouchableOpacity,
@@ -16,13 +12,7 @@ import {
   Alert,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+
 
 class Login extends Component {
     
@@ -35,11 +25,11 @@ class Login extends Component {
         password:"null"
       }
       // https://snack.expo.dev/ 
-      this.props.navigation.setOptions({
-        headerRight: () => (
-          <Button onPress={() => this.props.navigation.navigate('MainMenu', {'usuario':"david"}) } title="Info"/>
-        ),
-      });
+      // this.props.navigation.setOptions({
+      //   headerRight: () => (
+      //     <Button onPress={() => this.props.navigation.navigate('MainMenu', {'usuario':"david"}) } title="Info"/>
+      //   ),
+      // });
     }
     
     render() {
@@ -56,7 +46,7 @@ class Login extends Component {
                 <View style={styles.inputView}>
                     <TextInput
                     style={styles.TextInput}
-                    placeholder="Email."
+                    placeholder="Email"
                     placeholderTextColor="#003f5c"
                     onChangeText={(email) => this.setState({email})}
                     />
@@ -65,7 +55,7 @@ class Login extends Component {
                 <View style={styles.inputView}>
                     <TextInput
                     style={styles.TextInput}
-                    placeholder="Contraseña."
+                    placeholder="Contraseña"
                     placeholderTextColor="#003f5c"
                     onChangeText={(password) => this.setState({password})}
                     />
@@ -102,6 +92,8 @@ class Login extends Component {
       }
         
     }
+
+    
 
     
 }
@@ -156,6 +148,8 @@ const styles = StyleSheet.create({
       flex: 1,
       padding: 10,
       marginLeft: 20,
+      flex:1,
+      textAlign:"center",
     },
 
     loginBtn: {

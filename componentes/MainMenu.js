@@ -1,6 +1,6 @@
 import { Component } from "react"
 
-import React, { useState } from 'react';
+import React  from 'react';
 import {
   View,
   Text,
@@ -8,20 +8,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import { FlatList } from "react-native-gesture-handler";
+
+import { Entypo } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons'; 
+import { AntDesign } from '@expo/vector-icons'; 
 
 
 // Datos que contendrá el ListView
 const dataSource = [
-    { id: 1, title: 'Reservar' },
-    { id: 2, title: 'Guardias' },
+    { id: 1, title: '  Reservar' },
+    { id: 2, title: '  Guardias' },
     { id: 999}
     
 ];
@@ -32,7 +29,17 @@ class MainMenu extends Component {
     constructor(props) {
         super(props);
 
-        
+        this.props.navigation.setOptions({
+            headerLeft: () => (
+                <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}}>
+                    <Text style={{color:'blue'}}>
+                        ...
+                        <Entypo name="log-out" size={40} color="white" />
+                    </Text>
+                </TouchableOpacity>
+              //<Button onPress={() => this.props.navigation.navigate('MainMenu', {'usuario':"david"}) } title="Info"/>
+            ),
+        });
         //dataSource.push({id:2, title:this.props.route.params.usuario});
         
     }
@@ -43,8 +50,14 @@ class MainMenu extends Component {
         const Item = ({ id, title }) => (
 
             
+            
             <TouchableOpacity onPress={this.handleOnPress.bind(this, id)} style={styles.item}>
-                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.title}>
+                    {id == 1? <AntDesign name="form" size={35} color="black" />: null }
+                    {id == 2? <MaterialIcons name="local-police" size={35} color="black" />: null }
+                    <Text numberOfLines={1}></Text>
+                    {title}
+                </Text>
             </TouchableOpacity>
 
             // <View style={styles.item}>
