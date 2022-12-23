@@ -1,24 +1,18 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign'
-import Constants from 'expo-constants'
-//import Head from './Component/Head'
-//import ReservasButton from './Component/ReservasButton'
+import {View, Text, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
+import data from './Instalaciones.json'
+import DropDownMenu from './DropDownMenu'
 
-const data = [
-    { id: 1, title: 'Biblioteca' },
-    { id: 2, title: 'Sala de Ordenadores' },
-    { id: 3, title: 'Gimnasio'  },
-    { id: 4, title: 'Pista Exterior 1' },
-    { id: 5, title: 'Pista Exterior 2' },
-];
 
-const Materiales =({navigation}) => {
+const Instalaciones =({navigation}) => {
 
-    const Item = ({ title }) => (
+    const Item = ({ title, image }) => (
           <TouchableOpacity style={styles.instalacionsButton}
-                               onPress={() => navigation.navigate('ReservasRecurso', Item)} 
-                                >
+          onPress={() => navigation.navigate('ReservasRecurso', Item, 
+          //{'usuario':this.state.email} 
+          )} 
+           >
+                    <Image source={{image}} />
                    <Text style={styles.instalacionsText}>{title}</Text>               
           </TouchableOpacity>  
       );
@@ -26,22 +20,6 @@ const Materiales =({navigation}) => {
    
     return(
         <View>
-            <View style={{ marginTop: Constants.statusBarHeight, flexGrow: 1}}>
-              <View style={styles.headLabelContainer}>
-              <TouchableOpacity 
-                onPress={() => {navigation.goBack()
-                }}
-                >
-                <Text>
-                  <AntDesign name='arrowleft' style={styles.Arrow} />
-                </Text>
-              </TouchableOpacity>
-
-              <Text style={styles.AppName}>App</Text>
-              </View>
-          </View>
-
-
             <View style ={styles.row}>
                <TouchableOpacity style={styles.rButton}
                        >
@@ -55,14 +33,17 @@ const Materiales =({navigation}) => {
 
 
             <View style ={styles.row}>
-               <TouchableOpacity style={styles.midButton} >
+               <TouchableOpacity style={styles.midButton} 
+                        
+               >
                    <Text style ={styles.midText}>Reservas</Text>
                </TouchableOpacity>
                <TouchableOpacity style={styles.midButton}
-                           //onPress={() => navigation.toggleDrawer()}
+                           
                            >
                    <Text style ={styles.midText}>Instalaciones</Text>
                </TouchableOpacity>
+               <DropDownMenu />
            </View>
           
 
@@ -81,6 +62,7 @@ const Materiales =({navigation}) => {
                 keyExtractor={item => item.id}
                 
             />
+            
         </View>
     );
 
@@ -162,4 +144,4 @@ headLabelContainer:{
     flexDirection: 'row'
 }
 })
-export default Materiales 
+export default Instalaciones 
