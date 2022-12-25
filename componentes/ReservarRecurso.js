@@ -1,11 +1,29 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import { Calendar, LocaleConfig} from 'react-native-calendars'
-import moment from 'moment'
+import { StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
+import { Calendar, LocaleConfig} from 'react-native-calendars';
+import moment from 'moment';
+import DateTimePicker from '@react-native-community/datetimepicker'
+
+
 
 export default function ReservarRecurso({route}){
   const {title} = route.params;
-  //const [time, setTime] = useState(Time)
+
+  const [time, setTime] = useState()
+  const [day, setDay] = useState(Date());
+  const [mode, setMode] = useState('day')
+  const onChange = (event, selectedDate) => {
+    const currentDay = selectedDate || day;
+    setDay(currentDay);
+
+    let tempDate = new Date(currentDay);
+    let fDate =tempDate.getDay();
+    console.log(fDate)
+  }
+  
+  const showMode = (currentMode) => {
+   setMode(currentMode);
+  }
   const [timeSlots, setTimeSlots] = React.useState([]);
   const createTimeSlots = (fromTime, toTime) => {
     let startTime = moment(fromTime, 'hh:mm')
@@ -27,55 +45,56 @@ export default function ReservarRecurso({route}){
 
        return(
         <View >
-            
+            <Text style={styles.recursoName}>{title}</Text>
                <Calendar style={[styles.calendar]}
-                 onDateChange={(date) => this.setState({date})}
-                 onDayPress={setDate => {
-                  console.log(setDate)
-                  ;
-                  }}  
-                  markedDates={{
-                    'setDate': {selected: true, marked: true},
-                   // '2022-12-17': {marked: true},
-                   // '2022-12-18': {disabled: true}
-                  }} 
-               />
+                 //onChange={onChange}
+                //onDayPress={onChange}
+                  testId="dateTimePicker"
+                  value={new Date()}
+                  mode={day}
+                  display='defualt'
+                  //onChange={onChange}
+                  dateFormat="dayofweek day month"
+                  //onChange={(day) => this.setState({day})}
+                  //onDayPress={() =>{setDay(day) }}
+                  
+                />
                
                 <View style={styles.hourRow}>
-                  {timeSlots.map((item) => (
+                  {timeSlots.map((time) => (
                     <TouchableOpacity style={styles.hourButton}
-                        onDateChange={(Time) => this.setState({Time})}
-                        onPress={Time => {
-                        console.log(Time)                      
-                        }} 
+                        onDateChange={(time) => this.setState({time})}
+                        onPress={() =>{setTime(time) }} 
                     >
                       <Text style={styles.hourButtonLabel}>
-                        {item} 
+                        {time} 
                       </Text>
                     </TouchableOpacity>
                   ))}
+                    
+                    
+
                 </View>
 
                 <TouchableOpacity 
-                    //onPress={this.handleOnPress} 
-                    style={styles.reservarButton}>
+                    
+                    onPress={() =>
+                      Alert.alert("Alerta","confirmanción de reservación "+ title +" el día "+ day + ", a la hora "+ time,[
+                          {text:'OK',onPress: () => this.props.navigation.navigate('MisReservas', 
+                          {'usuario':this.state.email}, {title}, day, time)
+                          },
+                          {text: 'Cancelar',onPress: () => console.log("Cancel Pressed")}]
+                        )} 
+                          style={styles.reservarButton} >
                   <Text style={styles.reservarLabel}>Reservar</Text>
                 </TouchableOpacity>
-                <Text style={styles.InstalationsName}>{title}</Text>
+                
       </View>
            
     );
 }  
  
-handleOnPress = () => {
-      
-  if(validarFormulario(this.state.date, this.state.time)){
-    console.log('reserve')
-    this.props.navigation.navigate('MisReservas', 
-    {'usuario':this.state.email}, item, date, time)
-  }
 
-}
 
 const styles = StyleSheet.create({
   calendar: {
@@ -105,9 +124,9 @@ const styles = StyleSheet.create({
     padding: 10
  },
   
- InstalationsName: {
+ recursoName: {
     textAlign: "center",
-    fontSize: 20,
+    fontSize: 16,
     color: 'white',
     fontWeight: 'bold',
   },
