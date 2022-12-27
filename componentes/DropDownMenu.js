@@ -1,7 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { Text, StyleSheet, TouchableOpacity, SafeAreaView, Modal, Animated, Easing} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const DropDownMenu = () => {
+    const navigation = useNavigation();
+
     const [visible, setVisible] = useState(false);
     const options = [{ id: 1,
                        title: 'Instalaciones',
@@ -12,22 +15,21 @@ const DropDownMenu = () => {
                        
                     },
                     ];
-    {/*
-        handleOnPress (options)  
-            {
-                if(options.id == 1)
-                    {
-                        console.log(this.props)           
-                        this.props.navigation.navigate('Instalaciones.js')
-                     }
-                        
-                else(options.id == 2)
-                    {
-                        console.log(this.props)
-                        this.props.navigation.navigate('Materiales.js')
-                     }
+
+    
+    function comprobarBotonDropDown (options){
+        console.log(options)
+        if(options == 1){
+                console.log("Navegacion a instalaciones")
+                navigation.navigate('Instalaciones')
             }
-    */}
+                
+        else if(options == 2){
+                console.log("Navegacion a materiales")
+                navigation.navigate('Materiales')
+            }
+    }
+
                         
     const scale = useRef(new Animated.Value(0)).current;
     function resizeBox(to){
@@ -39,6 +41,8 @@ const DropDownMenu = () => {
             easing:Easing.linear
         }).start(()=> to == 0 && setVisible(false));
     }
+
+
     return (
         
         <>
@@ -52,13 +56,18 @@ const DropDownMenu = () => {
                                onTouchStart={() => resizeBox(0)}
                                >
                     <Animated.View style={styles.popup}>
-                       {options.map((op, i)=>(
+                       {options.map((opcion, i)=>(
                             <TouchableOpacity style={[styles.popupButton,{borderBottomWidth: i == options.length - 1 ? 0 : 1}]}
                                         key={i}
-                                        onPress={this.handleOnPress.bind(this, id)}
+                                        onPress={() =>
+                                            // Comprobamos a dónde quiere ir el usuario
+                                            comprobarBotonDropDown(opcion.id)
+                                            
+                                            
+                                        }
                                         
                                         >
-                                <Text style={styles.popupText}>{op.title}</Text>
+                                <Text style={styles.popupText}>{opcion.title}</Text>
                             </TouchableOpacity>
                        ))}
                     </Animated.View>

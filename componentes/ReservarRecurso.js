@@ -2,16 +2,30 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import { Calendar, LocaleConfig} from 'react-native-calendars';
 import moment from 'moment';
-import DateTimePicker from '@react-native-community/datetimepicker'
+//import DateTimePicker from '@react-native-community/datetimepicker'
 
 
+// Función para reservar recurso (Pantalla 4)
+export default function ReservarRecurso({route, navigation}){
 
-export default function ReservarRecurso({route}){
+  // Establecemos las constantes
   const {title} = route.params;
 
   const [time, setTime] = useState()
-  const [day, setDay] = useState(Date());
+  const [day, setDay] = useState("datee");
   const [mode, setMode] = useState('day')
+
+  const[globalMarkedDates, setGlobalMarkedDates] = useState({})
+
+  getSelectedDayEvents = date => {
+    let markedDates = {};
+    markedDates[date] = { selected: true, color: '#00B0BF', textColor: '#FFFFFF' };
+    let serviceDate = moment(date);
+    serviceDate = serviceDate.format("DD.MM.YYYY");
+    setGlobalMarkedDates(markedDates)
+  };
+
+  // TODO: Creo que las dos funciones siguientes no sirven para nada
   const onChange = (event, selectedDate) => {
     const currentDay = selectedDate || day;
     setDay(currentDay);
@@ -24,6 +38,8 @@ export default function ReservarRecurso({route}){
   const showMode = (currentMode) => {
    setMode(currentMode);
   }
+
+  // Configuración del calendario
   const [timeSlots, setTimeSlots] = React.useState([]);
   const createTimeSlots = (fromTime, toTime) => {
     let startTime = moment(fromTime, 'hh:mm')
@@ -39,6 +55,7 @@ export default function ReservarRecurso({route}){
     return arr;
   };
 
+
   React.useEffect(() => {
     setTimeSlots(createTimeSlots('09:00', '14:00'));
   }, []);
@@ -47,16 +64,21 @@ export default function ReservarRecurso({route}){
         <View >
             <Text style={styles.recursoName}>{title}</Text>
                <Calendar style={[styles.calendar]}
-                 //onChange={onChange}
-                //onDayPress={onChange}
+               
+
                   testId="dateTimePicker"
                   value={new Date()}
                   mode={day}
                   display='defualt'
-                  //onChange={onChange}
                   dateFormat="dayofweek day month"
-                  //onChange={(day) => this.setState({day})}
-                  //onDayPress={() =>{setDay(day) }}
+                  onDayPress={day =>{
+                    // IMPORTANTE: Es posible que haya que modificar el formato de la fecha
+                    console.log(day)
+                    setDay(day['day'] + "/" + day['month'] + "/" + day['year']) 
+                    getSelectedDayEvents(day.dateString);
+                  }
+                  }
+                  markedDates = {globalMarkedDates}
                   
                 />
                
@@ -69,6 +91,7 @@ export default function ReservarRecurso({route}){
                       <Text style={styles.hourButtonLabel}>
                         {time} 
                       </Text>
+
                     </TouchableOpacity>
                   ))}
                     
@@ -79,9 +102,10 @@ export default function ReservarRecurso({route}){
                 <TouchableOpacity 
                     
                     onPress={() =>
-                      Alert.alert("Alerta","confirmanción de reservación "+ title +" el día "+ day + ", a la hora "+ time,[
-                          {text:'OK',onPress: () => this.props.navigation.navigate('MisReservas', 
-                          {'usuario':this.state.email}, {title}, day, time)
+                      Alert.alert("Alerta","confirmanción de reserva del recurso " + route.params.nombreRecurso + " del usuario "+ route.params.usuario +" el día "+ day + ", a la hora "+ time,[
+                          {text:'OK',onPress: () => 
+                            //navigation.navigate('MisReservas', {'usuario':route.params.usuario, 'fecha':day})
+                            a = 1
                           },
                           {text: 'Cancelar',onPress: () => console.log("Cancel Pressed")}]
                         )} 

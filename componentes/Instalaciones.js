@@ -1,19 +1,20 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, FlatList, Image} from 'react-native';
-import data from './Instalaciones.json'
+import data from '../archivos/Instalaciones.json'
 import DropDownMenu from './DropDownMenu'
 
 
 const Instalaciones =({navigation}) => {
 
     const Item = ({ title, image }) => (
+          // TODO: Cambiar usuario
           <TouchableOpacity style={styles.instalacionsButton}
-          onPress={() => navigation.navigate('ReservasRecurso', Item, 
-          //{'usuario':this.state.email} 
-          )} 
-           >
-                    <Image source={{image}} />
-                   <Text style={styles.instalacionsText}>{title}</Text>               
+          onPress={() => navigation.navigate('ReservasRecurso',
+          {'usuario':'DAVID', 'nombreRecurso':title} 
+          )} >
+              <Image source={{image}} />
+              <Text style={styles.instalacionsText}>{title}</Text>    
+
           </TouchableOpacity>  
       );
 
@@ -36,14 +37,15 @@ const Instalaciones =({navigation}) => {
                <TouchableOpacity style={styles.midButton} 
                         
                >
-                   <Text style ={styles.midText}>Reservas</Text>
+                   <Text style ={styles.midText}>Reservar</Text>
                </TouchableOpacity>
                <TouchableOpacity style={styles.midButton}
-                           
                            >
                    <Text style ={styles.midText}>Instalaciones</Text>
                </TouchableOpacity>
+
                <DropDownMenu />
+
            </View>
           
 
@@ -52,12 +54,13 @@ const Instalaciones =({navigation}) => {
                 renderItem={({ item }) => {
                     console.log('Item: ', item)
                       return (
-                    <Item 
-                       id={item.id} title={item.title} 
-                       
-                       />
-                     ) 
-                         }}
+                        <Item 
+                          id={item.id} title={item.title} 
+                          
+                        />
+                      ) 
+                    }
+                }
 
                 keyExtractor={item => item.id}
                 

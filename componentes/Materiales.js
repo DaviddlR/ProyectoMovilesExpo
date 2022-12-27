@@ -1,17 +1,18 @@
 import React from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
-import data from './Materiales.json'
+import data from '../archivos/Materiales.json'
 import DropDownMenu from './DropDownMenu';
 
 const Materiales =({navigation}) => {
 
     const Item = ({ title }) => (
+          // TODO: Cambiar usuario
           <TouchableOpacity style={styles.instalacionsButton}
-                               onPress={() => navigation.navigate('ReservasRecurso', Item, 
-                               //{'usuario':this.state.email} 
-                               )} 
-                                >
-                   <Text style={styles.instalacionsText}>{title}</Text>               
+          onPress={() => navigation.navigate('ReservasRecurso',
+          {'usuario':'DAVID', 'nombreRecurso':title} 
+          )} 
+          >
+              <Text style={styles.instalacionsText}>{title}</Text>               
           </TouchableOpacity>  
       );
 
@@ -23,7 +24,7 @@ const Materiales =({navigation}) => {
             <View style ={styles.row}>
                <TouchableOpacity style={styles.rButton}
                        >
-                  <Text style ={styles.rText}>Reservas</Text>
+                  <Text style ={styles.rText}>Reservar</Text>
                </TouchableOpacity>
                <TouchableOpacity style={styles.rButton}
                        >
@@ -34,11 +35,11 @@ const Materiales =({navigation}) => {
 
             <View style ={styles.row}>
                <TouchableOpacity style={styles.midButton} >
-                   <Text style ={styles.midText}>Reservas</Text>
+                   <Text style ={styles.midText}>Reservar</Text>
                </TouchableOpacity>
                <TouchableOpacity style={styles.midButton}
                            >
-                   <Text style ={styles.midText}>Instalaciones</Text>
+                   <Text style ={styles.midText}>Materiales</Text>
                </TouchableOpacity>
                <DropDownMenu />
            </View>
@@ -54,7 +55,8 @@ const Materiales =({navigation}) => {
                        
                        />
                      ) 
-                         }}
+                  }
+                }
 
                 keyExtractor={item => item.id}
                 
