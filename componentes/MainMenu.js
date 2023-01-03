@@ -32,10 +32,15 @@ class MainMenu extends Component {
         this.state = {
                 email:this.props.route.params.usuario,
         }
-
+        
+        // console.log("AAAAAAAAa")
+        // console.log(this.props.route.params.reservasInstalaciones[0])
+        // console.log(this.props.route.params.reservasInstalaciones[0]['Lugar'])
+        // console.log("BBBBBBBBB")
+        
         this.props.navigation.setOptions({
             headerLeft: () => (
-                <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}}>
+                <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Login')}}>
                     <Text style={{color:'blue'}}>
                         ...
                         <Entypo name="log-out" size={40} color="white" />
@@ -103,7 +108,7 @@ class MainMenu extends Component {
         console.log(idPantalla)
         if(idPantalla == 1){
             console.log("Navegación hacia reservar")
-            this.props.navigation.navigate('Instalaciones', {'usuario':this.state.email})
+            this.props.navigation.navigate('Instalaciones', this.props.route.params)
         }
 
         if(idPantalla == 2){

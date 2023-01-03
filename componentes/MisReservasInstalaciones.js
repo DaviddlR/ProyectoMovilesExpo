@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -39,48 +38,52 @@ const dataSource = require('../archivos/reservasInstalacionesRealizadas.json');
 class MisReservasInstalaciones extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props.route.params.usuario);
-        console.log(dataSource);
+        console.log("Constructor MisReservasInstalaciones.js")
+        console.log("Parametros en reservas instalaciones: ", this.props.route.params);
         this.state = {
-           data: this.validarFecha(dataSource[this.props.route.params.usuario]),
-           //data: this.validarFecha(dataSource['mperez@gmail.com']),
+           //data: this.validarFecha(dataSource[this.props.route.params.usuario]),
+           data: this.props.route.params.datosUsuario['reservasInstalaciones']
         };
     }
 
     validarFecha(data){
-       let dataAux = data
-       for (const i of dataAux){
-            if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
-                dataAux.splice(i,1)
-            } else{
-                if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == i['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > i["Hora"].split("-")[1]){
-                    dataAux.splice(i,1)
-                }
-            }
-       }
-        return dataAux
+      let dataAux = data
+      for (const i of dataAux){
+          if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
+              dataAux.splice(i,1)
+          } else{
+              if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == i['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > i["Hora"].split("-")[1]){
+                  dataAux.splice(i,1)
+              }
+          }
+      }
+
+      return dataAux
     }
 
     render() {
         const Item = ({ id, Lugar, Hora, Dia }) => (
-                //validarFecha(id, Lugar, Hora, Dia),
-                console.log( new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() < Dia ),
-                <View style={styles.item}>
-                    <Text style={styles.title}>{Lugar}</Text>
-                    <Text style={styles.subtitle}> Dia: {Dia}</Text>
-                    <Text style={styles.subtitle}> Hora: {Hora}</Text>
+        //validarFecha(id, Lugar, Hora, Dia),
+        console.log( new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() < Dia ),
+        <View style={styles.item}>
+            <Text style={styles.title}>{Lugar}</Text>
+            <Text style={styles.subtitle}> Dia: {Dia}</Text>
+            <Text style={styles.subtitle}> Hora: {Hora}</Text>
 
-                    <TouchableOpacity
-                                  style={styles.cancelButton}
-                                  onPress={() =>
-                                    Alert.alert("Alerta","¿Quiene cancelar la reserva de "+ Lugar+" el día "+ Dia+ ", a la hora "+ Hora+ "?",[
-                                        {text: 'Cancelar',onPress: () => console.log("Cancel Pressed"),style: "cancel"},
-                                        {text:'OK',onPress: () => this.setState({data: this.state.data.filter(item => item.id !== id)})}
-                                    ]
-                                  )}>
-                                  <Text style={styles.colorCancel}> Cancelar </Text>
-                                </TouchableOpacity>
-                </View>
+            <TouchableOpacity
+                          style={styles.cancelButton}
+                          onPress={() =>
+                            Alert.alert("Alerta","¿Quiene cancelar la reserva de "+ Lugar+" el día "+ Dia+ ", a la hora "+ Hora+ "?",[
+                                {text: 'Cancelar',onPress: () => console.log("Cancel Pressed"),style: "cancel"},
+                                {text:'OK',onPress: () => {
+                                  this.setState({data: this.state.data.filter(item => item.id !== id)})}
+                                }
+                                
+                            ]
+                          )}>
+                          <Text style={styles.colorCancel}> Cancelar </Text>
+                        </TouchableOpacity>
+        </View>
 
         );
 
@@ -100,43 +103,44 @@ class MisReservasInstalaciones extends Component {
 
         return(
             <View>
-                            <View style ={styles.row}>
-                               <TouchableOpacity style={styles.rButton}
-                               onPress={() => this.props.navigation.navigate('Instalaciones',
-                                {'usuario':this.props.route.params.usuario}
-                                )}
-                                       >
-                                  <Text style ={styles.rText}>Reservar</Text>
-                               </TouchableOpacity>
-                               <TouchableOpacity style={styles.rButton}
-                                       >
-                                  <Text style ={styles.rText}>Mis reservas</Text>
-                               </TouchableOpacity>
-                            </View>
+                <View style ={styles.row}>
+                    <TouchableOpacity style={styles.rButton}
+                    onPress={() => this.props.navigation.navigate('Instalaciones',
+                    this.props.route.params
+                    )}
+                            >
+                      <Text style ={styles.rText}>Reservar</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.rButton}
+                            >
+                      <Text style ={styles.rText}>Mis reservas</Text>
+                    </TouchableOpacity>
+                </View>
 
 
-                            <View style ={styles.row}>
-                               <TouchableOpacity style={styles.midButton} >
-                                   <Text style ={styles.midText}>Reservas</Text>
-                               </TouchableOpacity>
-                               <TouchableOpacity style={styles.midButton}
-                                           >
-                                   <Text style ={styles.midText}>Instalaciones</Text>
-                               </TouchableOpacity>
-                               <DropDownMenu usuario={this.props.route.params.usuario} misReservas={true}/>
-                           </View>
+                <View style ={styles.row}>
+                    <TouchableOpacity style={styles.midButton} >
+                        <Text style ={styles.midText}>Reservas</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.midButton}
+                                >
+                        <Text style ={styles.midText}>Instalaciones</Text>
+                    </TouchableOpacity>
+
+                    <DropDownMenu params={this.props.route.params} misReservas={true}/>
+                </View>
 
 
-                        <View>
-                            <FlatList
-                                data={this.state.data}
-                                renderItem={renderItem}
-                                keyExtractor={item => item.id}
-                                ItemSeparatorComponent={ItemSeparatorView}
+            <View>
+                <FlatList
+                    data={this.state.data}
+                    renderItem={renderItem}
+                    keyExtractor={item => item.id}
+                    ItemSeparatorComponent={ItemSeparatorView}
 
-                            />
-                        </View>
-                    </View>
+                />
+            </View>
+        </View>
         );
     }
 }

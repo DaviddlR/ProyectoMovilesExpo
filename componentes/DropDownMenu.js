@@ -3,7 +3,7 @@ import { Text, StyleSheet, TouchableOpacity, SafeAreaView, Modal, Animated, Easi
 import { useNavigation } from '@react-navigation/native';
 
 
-const DropDownMenu = ({usuario, misReservas}) => {
+const DropDownMenu = ({params, misReservas}) => {
     const navigation = useNavigation();
     const [visible, setVisible] = useState(false);
     const options = [{ id: 1,
@@ -18,22 +18,23 @@ const DropDownMenu = ({usuario, misReservas}) => {
 
     
     function comprobarBotonDropDown (options){
-        console.log(usuario)
+        console.log("Desde dropdown:  ", params)
+        console.log(misReservas)
         if(options == 1){
                 console.log("Navegacion a instalaciones")
                 if(misReservas){
-                    navigation.navigate('MisReservasInstalaciones',  {'usuario':usuario})
+                    navigation.navigate('MisReservasInstalaciones',  params)
                 }else{
-                    navigation.navigate('Instalaciones',  {'usuario':usuario} )
+                    navigation.navigate('Instalaciones',  params )
                 }
             }
                 
         else if(options == 2){
                 console.log("Navegacion a materiales")
                 if(misReservas){
-                     navigation.navigate('MisReservasMaterial',{'usuario':usuario})
+                     navigation.navigate('MisReservasMaterial', params)
                 }else{
-                    navigation.navigate('Materiales',{'usuario':usuario})
+                    navigation.navigate('Materiales', params)
                 }
             }
     }

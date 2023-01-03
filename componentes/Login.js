@@ -12,7 +12,8 @@ import {
   Alert,
 } from 'react-native';
 
-
+// import dataInstalaciones from '../archivos/reservasInstalacionesRealizadas.json'
+// import dataMateriales from '../archivos/reservasMaterialRealizadas.json'
 
 class Login extends Component {
     
@@ -77,7 +78,8 @@ class Login extends Component {
       
       if(validarFormulario(this.state.email, this.state.password)){
         console.log('Login validado')
-        this.props.navigation.navigate('MainMenu', {'usuario':this.state.email})
+        var datosEntrePantallas = conseguirDatos(this.state.email)
+        this.props.navigation.navigate('MainMenu', datosEntrePantallas)
       } else {
         Alert.alert(
           "Error",
@@ -96,6 +98,52 @@ class Login extends Component {
     
 
     
+}
+
+
+
+
+function conseguirDatos(email){
+  console.log("------------------------------")
+  // Leemos los ficheros
+  let dataInstalaciones = require('../archivos/reservasInstalacionesRealizadas.json');
+  let dataMateriales = require('../archivos/reservasMaterialRealizadas.json');
+
+  console.log("instalaciones: ", dataInstalaciones)
+  console.log("materiales: ", dataMateriales)
+
+  // Creamos el diccionario
+  var diccionario = {}
+  diccionario['datosUsuario'] = {}
+  diccionario['datosUsuario']['usuario'] = email
+  diccionario['datosUsuario']['reservasInstalaciones'] = validarFecha(dataInstalaciones[email])
+  diccionario['datosUsuario']['reservasMaterial'] = validarFecha(dataMateriales[email])
+
+  console.log(diccionario)
+  // console.log(dataInstalaciones)
+  // console.log(dataInstalaciones[email][0])
+  // console.log(dataInstalaciones[email][0]['Dia'])
+
+  return diccionario
+}
+
+function validarFecha(data){
+  let dataAux = data
+  //console.log(dataAux)
+  for (const i of dataAux){
+       //console.log(dataAux[i])
+       //console.log(i)
+       if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
+           dataAux.splice(i,1)
+       } else{
+           if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == i['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > i["Hora"].split("-")[1]){
+               dataAux.splice(i,1)
+           }
+       }
+  }
+  
+  //console.log("--", dataAux)
+  return dataAux
 }
 
 function validarFormulario(email, contraseña){

@@ -6,30 +6,33 @@ import DropDownMenu from './DropDownMenu'
 
 const Instalaciones =({navigation, route}) => {
     console.log(route)
-    //const user = route.params.usuario
+    //const user = route.params.datosUsuario['usuario']
     const Item = ({ title, image }) => (
 
           <TouchableOpacity style={styles.instalacionsButton}
-          onPress={() => navigation.navigate('ReservarRecurso',
-          {'usuario':route.params.usuario, 'nombreRecurso':title, 'instalacion': true}
-          )} >
+          onPress={() => 
+              
+              //navigation.navigate('ReservarRecurso', {'usuario':route.params.datosUsuario['usuario'], 'nombreRecurso':title, 'instalacion': true})} >
+              //navigation.navigate('ReservarRecurso', añadirParametros(title, true))} >
+              navigation.navigate('ReservarRecurso', {'datosUsuario':{'usuario' : route.params.datosUsuario['usuario'], 'reservasInstalaciones' : route.params.datosUsuario['reservasInstalaciones'], 'reservasMaterial' : route.params.datosUsuario['reservasMaterial']}, 'nombreRecurso':title, 'instalacion': true})} >
               <Image source={{image}} />
               <Text style={styles.instalacionsText}>{title}</Text>    
 
           </TouchableOpacity>  
-      );
-
+    );
    
     return(
         <View>
             <View style ={styles.row}>
                <TouchableOpacity style={styles.rButton}
                        >
-                  <Text style ={styles.rText}>Reservas</Text>
+                  <Text style ={styles.rText}>Reservar</Text>
                </TouchableOpacity>
+
                <TouchableOpacity style={styles.rButton}
                onPress={() => navigation.navigate('MisReservasInstalaciones',
-                         {'usuario':route.params.usuario}
+                         //{'usuario':route.params.datosUsuario['usuario']}
+                         route.params
                          )}
                        >
                   <Text style ={styles.rText}>Mis reservas</Text>
@@ -48,7 +51,7 @@ const Instalaciones =({navigation, route}) => {
                    <Text style ={styles.midText}>Instalaciones</Text>
                </TouchableOpacity>
 
-               <DropDownMenu usuario={route.params.usuario} misReservas={false} />
+               <DropDownMenu params={route.params} misReservas={false} />
 
            </View>
           

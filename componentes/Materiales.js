@@ -7,10 +7,8 @@ const Materiales =({navigation,route}) => {
 
     const Item = ({ title }) => (
           <TouchableOpacity style={styles.instalacionsButton}
-          onPress={() => navigation.navigate('ReservarRecurso',
-          {'usuario':route.params.usuario, 'nombreRecurso':title, 'instalacion': false}
-          )} 
-          >
+          onPress={() => 
+            navigation.navigate('ReservarRecurso', {'datosUsuario':{'usuario' : route.params.datosUsuario['usuario'], 'reservasInstalaciones' : route.params.datosUsuario['reservasInstalaciones'], 'reservasMaterial' : route.params.datosUsuario['reservasMaterial']}, 'nombreRecurso':title, 'instalacion': false})} >
               <Text style={styles.instalacionsText}>{title}</Text>               
           </TouchableOpacity>  
       );
@@ -27,7 +25,7 @@ const Materiales =({navigation,route}) => {
                </TouchableOpacity>
                <TouchableOpacity style={styles.rButton}
                onPress={() => navigation.navigate('MisReservasMaterial',
-                                        {'usuario':route.params.usuario}
+                                        route.params
                                         )}
                        >
                   <Text style ={styles.rText}>Mis reservas</Text>
@@ -43,7 +41,7 @@ const Materiales =({navigation,route}) => {
                            >
                    <Text style ={styles.midText}>Materiales</Text>
                </TouchableOpacity>
-               <DropDownMenu usuario={route.params.usuario} misReservas={false}/>
+               <DropDownMenu params={route.params} misReservas={false}/>
            </View>
           
 

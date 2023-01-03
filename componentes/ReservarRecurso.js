@@ -9,7 +9,7 @@ import moment from 'moment';
 export default function ReservarRecurso({route, navigation}){
 
   // Establecemos las constantes
-  const {title} = route.params;
+  const {title} = route.params.nombreRecurso;
 
   const [time, setTime] = useState()
   const [day, setDay] = useState("datee");
@@ -102,12 +102,16 @@ export default function ReservarRecurso({route, navigation}){
                 <TouchableOpacity 
                     
                     onPress={() =>
-                      Alert.alert("Alerta","confirmanción de reserva del recurso " + route.params.nombreRecurso + " del usuario "+ route.params.usuario +" el día "+ day + ", a la hora "+ time,[
+                      Alert.alert("Alerta","confirmanción de reserva del recurso " + route.params.nombreRecurso + " del usuario "+ route.params.datosUsuario['usuario'] +" el día "+ day + ", a la hora "+ time,[
                           {text:'OK',onPress: () =>{
                             if(route.params.instalacion){
-                                navigation.navigate('MisReservasInstalaciones', {'usuario':route.params.usuario, 'fecha':day,'recurso':route.params.nombreRecurso,'hora':time})
-                            }else{
-                                navigation.navigate('MisReservasMaterial', {'usuario':route.params.usuario, 'fecha':day,'recurso':route.params.nombreRecurso,'hora':time})
+                                añadirInstalacion(route.params.nombreRecurso, day, time)
+                                navigation.navigate('MisReservasInstalaciones', route.params)
+                                //navigation.navigate('MisReservasInstalaciones', {'usuario':route.params.usuario, 'fecha':day,'recurso':route.params.nombreRecurso,'hora':time})
+                            } else {
+                                añadirMaterial(route.params.nombreRecurso, day, time)
+                                navigation.navigate("MisReservasMaterial", route.params)
+                                //navigation.navigate('MisReservasMaterial', {'usuario':route.params.usuario, 'fecha':day,'recurso':route.params.nombreRecurso,'hora':time})
                             }
                           }
                             //a = 1
@@ -121,6 +125,45 @@ export default function ReservarRecurso({route, navigation}){
       </View>
            
     );
+
+    function añadirInstalacion(nombre, dia, hora){
+      console.log("Añadiendo instalacion...")
+      
+      reservasActuales = route.params.datosUsuario['reservasInstalaciones']
+      numReservas = reservasActuales.length
+      console.log(numReservas)
+
+      reservasActuales[numReservas] = {}
+      reservasActuales[numReservas]['Dia'] = dia
+      reservasActuales[numReservas]['Hora'] = hora
+      reservasActuales[numReservas]['Lugar'] = nombre
+      reservasActuales[numReservas]['id'] = numReservas
+
+      route.params.datosUsuario['reservasInstalaciones'] = reservasActuales
+
+      delete route.params.nombreRecurso
+      delete route.params.instalacion
+    }
+
+    function añadirMaterial(nombre, dia, hora){
+      console.log("Añadiendo material...")
+      
+      reservasActuales = route.params.datosUsuario['reservasMaterial']
+      numReservas = reservasActuales.length
+      console.log(numReservas)
+
+      reservasActuales[numReservas] = {}
+      reservasActuales[numReservas]['Cantidad'] = 33  //TODO
+      reservasActuales[numReservas]['Dia'] = dia
+      reservasActuales[numReservas]['Hora'] = hora
+      reservasActuales[numReservas]['Lugar'] = nombre
+      reservasActuales[numReservas]['id'] = numReservas
+
+      route.params.datosUsuario['reservasMaterial'] = reservasActuales
+
+      delete route.params.nombreRecurso
+      delete route.params.instalacion
+    }
 }  
  
 

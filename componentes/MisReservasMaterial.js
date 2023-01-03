@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -42,7 +41,7 @@ class MisReservasMaterial extends Component {
         super(props);
 
         this.state = {
-            data: dataSource[this.props.route.params.usuario]
+          data: this.props.route.params.datosUsuario['reservasMaterial']
         };
     }
 
@@ -50,15 +49,15 @@ class MisReservasMaterial extends Component {
        let dataAux = data
        console.log(dataAux)
        for (const i of dataAux){
-                   console.log(dataAux[i])
-                   if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
-                       dataAux.splice(i,1)
-                   } else{
-                       if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == i['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > i["Hora"].split("-")[1]){
-                           dataAux.splice(i,1)
-                       }
-                   }
-              }
+            console.log(dataAux[i])
+            if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
+                dataAux.splice(i,1)
+            } else{
+                if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == i['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > i["Hora"].split("-")[1]){
+                    dataAux.splice(i,1)
+                }
+            }
+      }
        console.log(dataAux)
        return dataAux
     }
@@ -74,15 +73,20 @@ class MisReservasMaterial extends Component {
                 <Text style={styles.subtitle}> Unidades: {Cantidad}</Text>
 
                 <TouchableOpacity
-                              style={styles.cancelButton}
-                              onPress={() =>
-                                Alert.alert("Alerta","¿Quiene cancelar la reserva de "+ Material+" el día "+ Dia+ ", a la hora "+ Hora+ "?",[
-                                    {text: 'Cancelar',onPress: () => console.log("Cancel Pressed"),style: "cancel"},
-                                    {text:'OK',onPress: () => this.setState({data: this.state.data.filter(item => item.id !== id)})}
-                                ]
-                              )}>
-                              <Text> Cancelar </Text>
-                            </TouchableOpacity>
+                    style={styles.cancelButton}
+                    onPress={() =>
+                      Alert.alert("Alerta","¿Quiene cancelar la reserva de "+ Material+" el día "+ Dia+ ", a la hora "+ Hora+ "?",[
+                          {text: 'Cancelar',onPress: () => console.log("Cancel Pressed"),style: "cancel"},
+                          {text:'OK',onPress: () => {
+                            this.setState({data: this.state.data.filter(item => item.id !== id)})
+                            console.log("Cancelando...")
+                          }
+                            
+                          }
+                      ]
+                    )}>
+                    <Text> Cancelar </Text>
+                </TouchableOpacity>
             </View>
         );
 
@@ -105,7 +109,7 @@ class MisReservasMaterial extends Component {
                 <View style ={styles.row}>
                    <TouchableOpacity style={styles.rButton}
                    onPress={() => this.props.navigation.navigate('Materiales',
-                    {'usuario':this.props.route.params.usuario}
+                   this.props.route.params
                     )}
                            >
                       <Text style ={styles.rText}>Reservar</Text>
@@ -125,7 +129,7 @@ class MisReservasMaterial extends Component {
                                >
                        <Text style ={styles.midText}>Materiales</Text>
                    </TouchableOpacity>
-                   <DropDownMenu usuario={this.props.route.params.usuario} misReservas={true}/>
+                   <DropDownMenu params={this.props.route.params} misReservas={true}/>
                </View>
 
 
