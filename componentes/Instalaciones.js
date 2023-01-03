@@ -4,13 +4,13 @@ import data from '../archivos/Instalaciones.json'
 import DropDownMenu from './DropDownMenu'
 
 
-const Instalaciones =({navigation}) => {
-
+const Instalaciones =({navigation, route}) => {
+    console.log(route)
     const Item = ({ title, image }) => (
-          // TODO: Cambiar usuario
+
           <TouchableOpacity style={styles.instalacionsButton}
           onPress={() => navigation.navigate('ReservasRecurso',
-          {'usuario':'DAVID', 'nombreRecurso':title} 
+          {'usuario':route.params.usuario, 'nombreRecurso':title}
           )} >
               <Image source={{image}} />
               <Text style={styles.instalacionsText}>{title}</Text>    
@@ -27,6 +27,9 @@ const Instalaciones =({navigation}) => {
                   <Text style ={styles.rText}>Reservas</Text>
                </TouchableOpacity>
                <TouchableOpacity style={styles.rButton}
+               onPress={() => navigation.navigate('MisReservasInstalaciones',
+                         {'usuario':route.params.usuario}
+                         )}
                        >
                   <Text style ={styles.rText}>Mis reservas</Text>
                </TouchableOpacity>

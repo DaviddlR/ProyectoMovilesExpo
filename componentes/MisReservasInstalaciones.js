@@ -40,19 +40,19 @@ class MisReservasInstalaciones extends Component {
         super(props);
 
         this.state = {
-        // data: dataSource[this.props.route.params.usuario]
+           //data: this.validarFecha(dataSource[this.props.route.params.usuario]),
            data: this.validarFecha(dataSource['mperez@gmail.com']),
         };
     }
 
     validarFecha(data){
        let dataAux = data
-       for (i in dataAux){
+       for (const i of dataAux){
             console.log(dataAux[i])
-            if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > dataAux[i]['Dia'] ){
+            if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
                 dataAux.splice(i,1)
             } else{
-                if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == dataAux[i]['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > dataAux[i]["Hora"].split("-")[1]){
+                if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == i['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > i["Hora"].split("-")[1]){
                     dataAux.splice(i,1)
                 }
             }

@@ -4,7 +4,6 @@ import { useNavigation } from '@react-navigation/native';
 
 const DropDownMenu = () => {
     const navigation = useNavigation();
-
     const [visible, setVisible] = useState(false);
     const options = [{ id: 1,
                        title: 'Instalaciones',
@@ -18,10 +17,10 @@ const DropDownMenu = () => {
 
     
     function comprobarBotonDropDown (options){
-        console.log(options)
+        console.log(navigation.state)
         if(options == 1){
                 console.log("Navegacion a instalaciones")
-                navigation.navigate('Instalaciones')
+                navigation.navigate('Instalaciones' )
             }
                 
         else if(options == 2){

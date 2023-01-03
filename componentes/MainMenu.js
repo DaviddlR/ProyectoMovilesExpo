@@ -29,6 +29,10 @@ class MainMenu extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+                email:this.props.route.params.usuario,
+        }
+
         this.props.navigation.setOptions({
             headerLeft: () => (
                 <TouchableOpacity onPress={()=>{this.props.navigation.goBack()}}>
@@ -99,7 +103,7 @@ class MainMenu extends Component {
         console.log(idPantalla)
         if(idPantalla == 1){
             console.log("Navegación hacia reservar")
-            //this.props.navigation.navigate('PantallaReservas.js', {'usuario':this.state.email})
+            this.props.navigation.navigate('Instalaciones', {'usuario':this.state.email})
         }
 
         if(idPantalla == 2){

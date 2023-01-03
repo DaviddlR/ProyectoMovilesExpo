@@ -9,7 +9,7 @@ const Materiales =({navigation}) => {
           // TODO: Cambiar usuario
           <TouchableOpacity style={styles.instalacionsButton}
           onPress={() => navigation.navigate('ReservasRecurso',
-          {'usuario':'DAVID', 'nombreRecurso':title} 
+          {'usuario':'DAVID', 'nombreRecurso':title}
           )} 
           >
               <Text style={styles.instalacionsText}>{title}</Text>               
