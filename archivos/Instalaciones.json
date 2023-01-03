@@ -1,0 +1,28 @@
+[
+    { "id": 1,
+     "title": "Biblioteca",
+     "image": ""
+    
+    }, 
+    { "id": 2,
+     "title": "Sala de ordenadores",
+     "image": ""
+    
+    }, 
+    { "id": 3,
+     "title": "Pista Exterior 2",
+     "image": ""
+    
+    },
+    { "id": 4,
+     "title": "Pista Exterior 1",
+     "image": ""
+    
+    },
+    { "id": 5,
+     "title": "Gimnasio",
+     "image": ""
+    
+    }
+]
+   
