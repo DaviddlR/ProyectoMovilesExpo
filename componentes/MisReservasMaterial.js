@@ -27,6 +27,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import DropDownMenu from './DropDownMenu'
 
 
 
@@ -42,7 +43,6 @@ class MisReservasMaterial extends Component {
 
         this.state = {
             data: dataSource[this.props.route.params.usuario]
-        //   data: this.validarFecha(dataSource['mperez@gmail.com']),
         };
     }
 
@@ -102,6 +102,34 @@ class MisReservasMaterial extends Component {
 
         return(
             <View>
+                <View style ={styles.row}>
+                   <TouchableOpacity style={styles.rButton}
+                   onPress={() => this.props.navigation.navigate('Materiales',
+                    {'usuario':this.props.route.params.usuario}
+                    )}
+                           >
+                      <Text style ={styles.rText}>Reservar</Text>
+                   </TouchableOpacity>
+                   <TouchableOpacity style={styles.rButton}
+                           >
+                      <Text style ={styles.rText}>Mis reservas</Text>
+                   </TouchableOpacity>
+                </View>
+
+
+                <View style ={styles.row}>
+                   <TouchableOpacity style={styles.midButton} >
+                       <Text style ={styles.midText}>Reservas</Text>
+                   </TouchableOpacity>
+                   <TouchableOpacity style={styles.midButton}
+                               >
+                       <Text style ={styles.midText}>Materiales</Text>
+                   </TouchableOpacity>
+                   <DropDownMenu usuario={this.props.route.params.usuario} misReservas={true}/>
+               </View>
+
+
+            <View>
                 <FlatList
                     data={this.state.data}
                     renderItem={renderItem}
@@ -110,6 +138,7 @@ class MisReservasMaterial extends Component {
 
                 />
             </View>
+        </View>
         );
     }
 }
@@ -143,7 +172,38 @@ const styles = StyleSheet.create({
      position: 'absolute',
      backgroundColor: 'red',
      right: '5%',
-     top: '60%' }
+     top: '60%' },
+     row:{
+        flexDirection: 'row'
+      },
+
+      midButton: {
+        flex: 1,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#DDF4FF',
+        borderwidth: 4,
+        borderColor: 'black',
+      },
+
+      midText: {
+        color: 'black',
+        fontSize: 16
+      },
+
+      rText: {
+        color: 'white',
+        fontSize: 20
+      },
+
+      rButton: {
+        flex: 1,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#02366B'
+      }
   });
 
 

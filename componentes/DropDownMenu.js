@@ -2,7 +2,8 @@ import React, { useState, useRef } from 'react';
 import { Text, StyleSheet, TouchableOpacity, SafeAreaView, Modal, Animated, Easing} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const DropDownMenu = () => {
+
+const DropDownMenu = ({usuario, misReservas}) => {
     const navigation = useNavigation();
     const [visible, setVisible] = useState(false);
     const options = [{ id: 1,
@@ -17,15 +18,23 @@ const DropDownMenu = () => {
 
     
     function comprobarBotonDropDown (options){
-        console.log(navigation.state)
+        console.log(usuario)
         if(options == 1){
                 console.log("Navegacion a instalaciones")
-                navigation.navigate('Instalaciones' )
+                if(misReservas){
+                    navigation.navigate('MisReservasInstalaciones',  {'usuario':usuario})
+                }else{
+                    navigation.navigate('Instalaciones',  {'usuario':usuario} )
+                }
             }
                 
         else if(options == 2){
                 console.log("Navegacion a materiales")
-                navigation.navigate('Materiales')
+                if(misReservas){
+                     navigation.navigate('MisReservasMaterial',{'usuario':usuario})
+                }else{
+                    navigation.navigate('Materiales',{'usuario':usuario})
+                }
             }
     }
 

@@ -3,13 +3,12 @@ import {View, Text, StyleSheet, TouchableOpacity, FlatList} from 'react-native';
 import data from '../archivos/Materiales.json'
 import DropDownMenu from './DropDownMenu';
 
-const Materiales =({navigation}) => {
+const Materiales =({navigation,route}) => {
 
     const Item = ({ title }) => (
-          // TODO: Cambiar usuario
           <TouchableOpacity style={styles.instalacionsButton}
-          onPress={() => navigation.navigate('ReservasRecurso',
-          {'usuario':'DAVID', 'nombreRecurso':title}
+          onPress={() => navigation.navigate('ReservarRecurso',
+          {'usuario':route.params.usuario, 'nombreRecurso':title, 'instalacion': false}
           )} 
           >
               <Text style={styles.instalacionsText}>{title}</Text>               
@@ -27,6 +26,9 @@ const Materiales =({navigation}) => {
                   <Text style ={styles.rText}>Reservar</Text>
                </TouchableOpacity>
                <TouchableOpacity style={styles.rButton}
+               onPress={() => navigation.navigate('MisReservasMaterial',
+                                        {'usuario':route.params.usuario}
+                                        )}
                        >
                   <Text style ={styles.rText}>Mis reservas</Text>
                </TouchableOpacity>
@@ -41,7 +43,7 @@ const Materiales =({navigation}) => {
                            >
                    <Text style ={styles.midText}>Materiales</Text>
                </TouchableOpacity>
-               <DropDownMenu />
+               <DropDownMenu usuario={route.params.usuario} misReservas={false}/>
            </View>
           
 

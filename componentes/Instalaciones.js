@@ -6,11 +6,12 @@ import DropDownMenu from './DropDownMenu'
 
 const Instalaciones =({navigation, route}) => {
     console.log(route)
+    //const user = route.params.usuario
     const Item = ({ title, image }) => (
 
           <TouchableOpacity style={styles.instalacionsButton}
-          onPress={() => navigation.navigate('ReservasRecurso',
-          {'usuario':route.params.usuario, 'nombreRecurso':title}
+          onPress={() => navigation.navigate('ReservarRecurso',
+          {'usuario':route.params.usuario, 'nombreRecurso':title, 'instalacion': true}
           )} >
               <Image source={{image}} />
               <Text style={styles.instalacionsText}>{title}</Text>    
@@ -47,7 +48,7 @@ const Instalaciones =({navigation, route}) => {
                    <Text style ={styles.midText}>Instalaciones</Text>
                </TouchableOpacity>
 
-               <DropDownMenu />
+               <DropDownMenu usuario={route.params.usuario} misReservas={false} />
 
            </View>
           

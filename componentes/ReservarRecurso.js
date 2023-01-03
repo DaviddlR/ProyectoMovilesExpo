@@ -84,9 +84,9 @@ export default function ReservarRecurso({route, navigation}){
                
                 <View style={styles.hourRow}>
                   {timeSlots.map((time) => (
-                    <TouchableOpacity style={styles.hourButton}
-                        onDateChange={(time) => this.setState({time})}
-                        onPress={() =>{setTime(time) }} 
+                    <TouchableOpacity style={styles.hourButton} key={time}
+                        //onDateChange={(time) => this.setState({time})}
+                        onPress={() =>{ setTime(time) }}
                     >
                       <Text style={styles.hourButtonLabel}>
                         {time} 
@@ -103,9 +103,14 @@ export default function ReservarRecurso({route, navigation}){
                     
                     onPress={() =>
                       Alert.alert("Alerta","confirmanción de reserva del recurso " + route.params.nombreRecurso + " del usuario "+ route.params.usuario +" el día "+ day + ", a la hora "+ time,[
-                          {text:'OK',onPress: () => 
-                            //navigation.navigate('MisReservas', {'usuario':route.params.usuario, 'fecha':day})
-                            a = 1
+                          {text:'OK',onPress: () =>{
+                            if(route.params.instalacion){
+                                navigation.navigate('MisReservasInstalaciones', {'usuario':route.params.usuario, 'fecha':day,'recurso':route.params.nombreRecurso,'hora':time})
+                            }else{
+                                navigation.navigate('MisReservasMaterial', {'usuario':route.params.usuario, 'fecha':day,'recurso':route.params.nombreRecurso,'hora':time})
+                            }
+                          }
+                            //a = 1
                           },
                           {text: 'Cancelar',onPress: () => console.log("Cancel Pressed")}]
                         )} 

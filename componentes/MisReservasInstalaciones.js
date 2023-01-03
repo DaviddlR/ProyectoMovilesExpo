@@ -27,6 +27,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import DropDownMenu from './DropDownMenu'
 
 
 import  { Component } from 'react';
@@ -38,17 +39,17 @@ const dataSource = require('../archivos/reservasInstalacionesRealizadas.json');
 class MisReservasInstalaciones extends Component {
     constructor(props) {
         super(props);
-
+        console.log(this.props.route.params.usuario);
+        console.log(dataSource);
         this.state = {
-           //data: this.validarFecha(dataSource[this.props.route.params.usuario]),
-           data: this.validarFecha(dataSource['mperez@gmail.com']),
+           data: this.validarFecha(dataSource[this.props.route.params.usuario]),
+           //data: this.validarFecha(dataSource['mperez@gmail.com']),
         };
     }
 
     validarFecha(data){
        let dataAux = data
        for (const i of dataAux){
-            console.log(dataAux[i])
             if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
                 dataAux.splice(i,1)
             } else{
@@ -57,7 +58,6 @@ class MisReservasInstalaciones extends Component {
                 }
             }
        }
-        console.log(dataAux)
         return dataAux
     }
 
@@ -100,14 +100,43 @@ class MisReservasInstalaciones extends Component {
 
         return(
             <View>
-                <FlatList
-                    data={this.state.data}
-                    renderItem={renderItem}
-                    keyExtractor={item => item.id}
-                    ItemSeparatorComponent={ItemSeparatorView}
+                            <View style ={styles.row}>
+                               <TouchableOpacity style={styles.rButton}
+                               onPress={() => this.props.navigation.navigate('Instalaciones',
+                                {'usuario':this.props.route.params.usuario}
+                                )}
+                                       >
+                                  <Text style ={styles.rText}>Reservar</Text>
+                               </TouchableOpacity>
+                               <TouchableOpacity style={styles.rButton}
+                                       >
+                                  <Text style ={styles.rText}>Mis reservas</Text>
+                               </TouchableOpacity>
+                            </View>
 
-                />
-            </View>
+
+                            <View style ={styles.row}>
+                               <TouchableOpacity style={styles.midButton} >
+                                   <Text style ={styles.midText}>Reservas</Text>
+                               </TouchableOpacity>
+                               <TouchableOpacity style={styles.midButton}
+                                           >
+                                   <Text style ={styles.midText}>Instalaciones</Text>
+                               </TouchableOpacity>
+                               <DropDownMenu usuario={this.props.route.params.usuario} misReservas={true}/>
+                           </View>
+
+
+                        <View>
+                            <FlatList
+                                data={this.state.data}
+                                renderItem={renderItem}
+                                keyExtractor={item => item.id}
+                                ItemSeparatorComponent={ItemSeparatorView}
+
+                            />
+                        </View>
+                    </View>
         );
     }
 }
@@ -145,7 +174,38 @@ const styles = StyleSheet.create({
     colorCancel:{
      color: 'white',
      fontSize: 17,
-    }
+    },
+    row:{
+                        flexDirection: 'row'
+                      },
+
+                      midButton: {
+                        flex: 1,
+                        height: 30,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#DDF4FF',
+                        borderwidth: 4,
+                        borderColor: 'black',
+                      },
+
+                      midText: {
+                        color: 'black',
+                        fontSize: 16
+                      },
+
+                      rText: {
+                        color: 'white',
+                        fontSize: 20
+                      },
+
+                      rButton: {
+                        flex: 1,
+                        height: 50,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        backgroundColor: '#02366B'
+                      }
 
   });
 
