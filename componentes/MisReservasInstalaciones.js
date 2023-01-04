@@ -76,7 +76,8 @@ class MisReservasInstalaciones extends Component {
                             Alert.alert("Alerta","¿Quiene cancelar la reserva de "+ Lugar+" el día "+ Dia+ ", a la hora "+ Hora+ "?",[
                                 {text: 'Cancelar',onPress: () => console.log("Cancel Pressed"),style: "cancel"},
                                 {text:'OK',onPress: () => {
-                                  this.setState({data: this.state.data.filter(item => item.id !== id)})}
+                                  this.setState({data: this.state.data.filter(item => item.id !== id)})
+                                }
                                 }
                                 
                             ]

@@ -56,6 +56,7 @@ class Login extends Component {
                 <View style={styles.inputView}>
                     <TextInput
                     style={styles.TextInput}
+                    secureTextEntry={true}
                     placeholder="Contraseña"
                     placeholderTextColor="#003f5c"
                     onChangeText={(password) => this.setState({password})}

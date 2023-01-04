@@ -7,7 +7,6 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -45,7 +44,7 @@ class MisReservasInstalaciones extends Component {
 
 
         this.state = {
-           data: this.contarReservas(dataSource,"Biblioteca"),
+           data: this.contarReservas(dataSource, this.props.route.params.nombreRecurso),
            //data: this.contarReservas(dataSource,this.props.route.params.instalacion),
         };
     }

@@ -2,11 +2,14 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import { Calendar, LocaleConfig} from 'react-native-calendars';
 import moment from 'moment';
-//import DateTimePicker from '@react-native-community/datetimepicker'
+
+import { Ionicons } from '@expo/vector-icons';
 
 
 // Función para reservar recurso (Pantalla 4)
 export default function ReservarRecurso({route, navigation}){
+
+  
 
   // Establecemos las constantes
   const {title} = route.params.nombreRecurso;
@@ -58,6 +61,42 @@ export default function ReservarRecurso({route, navigation}){
 
   React.useEffect(() => {
     setTimeSlots(createTimeSlots('09:00', '14:00'));
+
+    // Configuramos las opciones del header
+    if (route.params.instalacion) {
+      navigation.setOptions({
+        headerRight: () => (
+            <TouchableOpacity onPress={()=>{
+              
+              navigation.navigate('EstadisticasInstalaciones', route.params)
+            }}>
+                <Text style={{color:'blue'}}>
+                    ...
+                    <Ionicons name="stats-chart" size={40} color="white" />
+                </Text>
+            </TouchableOpacity>
+          //<Button onPress={() => this.props.navigation.navigate('MainMenu', {'usuario':"david"}) } title="Info"/>
+        ),
+      });
+    } else {
+      navigation.setOptions({
+        headerRight: () => (
+            <TouchableOpacity onPress={()=>{
+              
+              navigation.navigate('EstadisticasMaterial', route.params)
+            }}>
+                <Text style={{color:'blue'}}>
+                    ...
+                    <Ionicons name="stats-chart" size={40} color="white" />
+                </Text>
+            </TouchableOpacity>
+          //<Button onPress={() => this.props.navigation.navigate('MainMenu', {'usuario':"david"}) } title="Info"/>
+        ),
+      });
+    }
+
+    
+
   }, []);
 
        return(
