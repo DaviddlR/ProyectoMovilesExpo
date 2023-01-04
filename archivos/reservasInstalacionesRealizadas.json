@@ -3,7 +3,7 @@
 	{
 	 "id": 1,
 	 "Lugar":"Biblioteca",
-	 "Hora": "9:30-10:30",
+	 "Hora": "09:30-10:30",
 	 "Dia": "20/01/2022"
 	}
     ],
@@ -15,8 +15,8 @@
 	},{
 	 "id": 2,
 	 "Lugar":"Pista Exterior 1",
-	 "Hora": "8:30-9:30",
-	 "Dia": "20/12/2022"
+	 "Hora": "08:30-09:30",
+	 "Dia": "20/12/2023"
 	}],
     "marodri@gmail.com":[{
 	 "id": 1,
@@ -27,7 +27,7 @@
     "ahmedali@gmail.com":[{
 	 "id": 1,
 	 "Lugar":"Biblioteca",
-	 "Hora": "9:30-10:30",
+	 "Hora": "09:30-10:30",
 	 "Dia": "20/01/2022"
 	}]
 }

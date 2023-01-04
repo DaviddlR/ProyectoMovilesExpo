@@ -41,25 +41,21 @@ class MisReservasMaterial extends Component {
         super(props);
 
         this.state = {
-          data: this.props.route.params.datosUsuario['reservasMaterial']
+          data: this.validarFecha(this.props.route.params.datosUsuario['reservasMaterial'])
         };
     }
 
     validarFecha(data){
        let dataAux = data
-       console.log(dataAux)
-       for (const i of dataAux){
-            console.log(dataAux[i])
-            if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
-                dataAux.splice(i,1)
-            } else{
-                if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == i['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > i["Hora"].split("-")[1]){
-                    dataAux.splice(i,1)
-                }
-            }
-      }
-       console.log(dataAux)
-       return dataAux
+         for (let i = dataAux.length-1; i>=0; i--){
+              var currentDate = new Date()
+              var reservaDate = new Date(""+dataAux[i]["Dia"].split('/')[2]+"-"+dataAux[i]["Dia"].split('/')[1]+"-"+dataAux[i]["Dia"].split('/')[0]+"T"+dataAux[i]["Hora"].split('-')[1]+":00.000Z")
+              if (reservaDate < currentDate){
+               dataAux.splice(i,1)
+              }
+
+         }
+         return dataAux
     }
 
 

@@ -3,7 +3,7 @@
 	{
 	 "id": 1,
 	 "Material":"Tablets",
-	 "Hora": "9:30-10:30",
+	 "Hora": "09:30-10:30",
 	 "Dia": "20/01/2022",
 	 "Cantidad": 10
 	}
@@ -12,12 +12,12 @@
 	 "id": 1,
 	 "Material":"Aros",
 	 "Hora": "12:00-13:00",
-	 "Dia": "16/12/2022",
+	 "Dia": "16/01/2023",
 	 "Cantidad": 15
 	},{
 	 "id":2,
 	 "Material":"Conos",
-	 "Hora": "8:30-9:30",
+	 "Hora": "08:30-09:30",
 	 "Dia": "20/12/2022",
 	 "Cantidad": 20
 	}],
@@ -31,7 +31,7 @@
     "ahmedali@gmail.com":[{
 	 "id": 1,
 	 "Material":"Diccionarios",
-	 "Hora": "9:30-10:30",
+	 "Hora": "09:30-10:30",
 	 "Dia": "20/01/2022",
 	 "Cantidad": 7
 	}]

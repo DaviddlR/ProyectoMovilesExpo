@@ -42,23 +42,21 @@ class MisReservasInstalaciones extends Component {
         console.log("Parametros en reservas instalaciones: ", this.props.route.params);
         this.state = {
            //data: this.validarFecha(dataSource[this.props.route.params.usuario]),
-           data: this.props.route.params.datosUsuario['reservasInstalaciones']
+           data: this.validarFecha(this.props.route.params.datosUsuario['reservasInstalaciones'])
         };
     }
 
     validarFecha(data){
       let dataAux = data
-      for (const i of dataAux){
-          if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
+        for (let i = dataAux.length-1; i>=0; i--){
+             var currentDate = new Date()
+             var reservaDate = new Date(""+dataAux[i]["Dia"].split('/')[2]+"-"+dataAux[i]["Dia"].split('/')[1]+"-"+dataAux[i]["Dia"].split('/')[0]+"T"+dataAux[i]["Hora"].split('-')[1]+":00.000Z")
+             if (reservaDate < currentDate){
               dataAux.splice(i,1)
-          } else{
-              if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == i['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > i["Hora"].split("-")[1]){
-                  dataAux.splice(i,1)
-              }
-          }
-      }
+             }
 
-      return dataAux
+        }
+        return dataAux
     }
 
     render() {
@@ -77,6 +75,7 @@ class MisReservasInstalaciones extends Component {
                                 {text: 'Cancelar',onPress: () => console.log("Cancel Pressed"),style: "cancel"},
                                 {text:'OK',onPress: () => {
                                   this.setState({data: this.state.data.filter(item => item.id !== id)})
+                                  this.props.route.params.datosUsuario['reservasInstalaciones'] = this.props.route.params.datosUsuario['reservasInstalaciones'].filter(item => item.id !== id)
                                 }
                                 }
                                 

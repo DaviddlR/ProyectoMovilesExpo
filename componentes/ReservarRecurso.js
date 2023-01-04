@@ -174,9 +174,9 @@ export default function ReservarRecurso({route, navigation}){
 
       reservasActuales[numReservas] = {}
       reservasActuales[numReservas]['Dia'] = dia
-      reservasActuales[numReservas]['Hora'] = hora
+      reservasActuales[numReservas]['Hora'] = hora+"-"+(Number(hora.split(":")[0])+1)+":"+hora.split(":")[1]
       reservasActuales[numReservas]['Lugar'] = nombre
-      reservasActuales[numReservas]['id'] = numReservas
+      reservasActuales[numReservas]['id'] = numReservas+1
 
       route.params.datosUsuario['reservasInstalaciones'] = reservasActuales
 
@@ -186,7 +186,9 @@ export default function ReservarRecurso({route, navigation}){
 
     function añadirMaterial(nombre, dia, hora){
       console.log("Añadiendo material...")
-      
+
+      console.log(hora)
+      console.log(Number(hora.split(":")[0])+1)
       reservasActuales = route.params.datosUsuario['reservasMaterial']
       numReservas = reservasActuales.length
       console.log(numReservas)
@@ -194,9 +196,9 @@ export default function ReservarRecurso({route, navigation}){
       reservasActuales[numReservas] = {}
       reservasActuales[numReservas]['Cantidad'] = 33  //TODO
       reservasActuales[numReservas]['Dia'] = dia
-      reservasActuales[numReservas]['Hora'] = hora
-      reservasActuales[numReservas]['Lugar'] = nombre
-      reservasActuales[numReservas]['id'] = numReservas
+      reservasActuales[numReservas]['Hora'] = hora+"-"+(Number(hora.split(":")[0])+1)+":"+hora.split(":")[1]
+      reservasActuales[numReservas]['Material'] = nombre
+      reservasActuales[numReservas]['id'] = numReservas+1
 
       route.params.datosUsuario['reservasMaterial'] = reservasActuales
 

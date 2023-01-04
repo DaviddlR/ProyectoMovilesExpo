@@ -117,11 +117,11 @@ function conseguirDatos(email){
   var diccionario = {}
   diccionario['datosUsuario'] = {}
   diccionario['datosUsuario']['usuario'] = email
-  diccionario['datosUsuario']['reservasInstalaciones'] = validarFecha(dataInstalaciones[email])
-  diccionario['datosUsuario']['reservasMaterial'] = validarFecha(dataMateriales[email])
+  //diccionario['datosUsuario']['reservasInstalaciones'] = validarFecha(dataInstalaciones[email])
+  diccionario['datosUsuario']['reservasInstalaciones'] = dataInstalaciones[email]
+  diccionario['datosUsuario']['reservasMaterial'] = dataMateriales[email]
 
   console.log(diccionario)
-  // console.log(dataInstalaciones)
   // console.log(dataInstalaciones[email][0])
   // console.log(dataInstalaciones[email][0]['Dia'])
 
@@ -130,20 +130,15 @@ function conseguirDatos(email){
 
 function validarFecha(data){
   let dataAux = data
-  //console.log(dataAux)
-  for (const i of dataAux){
-       //console.log(dataAux[i])
-       //console.log(i)
-       if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() > i['Dia'] ){
-           dataAux.splice(i,1)
-       } else{
-           if (new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() == i['Dia'] && new Date().getHours()+':'+new Date().getMinutes() > i["Hora"].split("-")[1]){
-               dataAux.splice(i,1)
-           }
+  for (let i = dataAux.length-1; i>=0; i--){
+       var currentDate = new Date()
+       var reservaDate = new Date(""+dataAux[i]["Dia"].split('/')[2]+"-"+dataAux[i]["Dia"].split('/')[1]+"-"+dataAux[i]["Dia"].split('/')[0]+"T"+dataAux[i]["Hora"].split('-')[1]+":00.000Z")
+       if (reservaDate < currentDate){
+        console.log("Reserva Menor")
+        dataAux.splice(i,1)
        }
+
   }
-  
-  //console.log("--", dataAux)
   return dataAux
 }
 
