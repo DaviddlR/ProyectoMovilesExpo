@@ -11,16 +11,16 @@ const dataMaxMaterial = require('../archivos/Materiales.json');
 console.log(dataMaxMaterial)
 // Función para reservar recurso (Pantalla 4)
 export default function ReservarRecurso({route, navigation}){
-  // Establecemos las constantes
+  // Establecemos las
+  var maxValueMaterial = !route.params.instalacion ? dataMaxMaterial.filter(item => item.title == route.params.nombreRecurso )[0]["cantidadMax"] : 0
   const {title} = route.params.nombreRecurso;
 
   const [time, setTime] = useState()
   const [day, setDay] = useState("datee");
   const [mode, setMode] = useState('day')
   const [value, setValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(dataMaxMaterial.filter(item => item.title == route.params.nombreRecurso )[0]["cantidadMax"])
+  const [maxValue, setMaxValue] = useState(maxValueMaterial)
   const [maxValueAct, setMaxValueAct] = useState(maxValue)
-
 
 
   const[globalMarkedDates, setGlobalMarkedDates] = useState({})
@@ -132,7 +132,10 @@ export default function ReservarRecurso({route, navigation}){
                         //onDateChange={(time) => this.setState({time})}
                         onPress={() =>{
                             setTime(time)
-                            comprobarReservaHoraSeleccionada(dataReservas, route.params.nombreRecurso, time )
+                            if (!route.params.instalacion){
+                                comprobarReservaHoraSeleccionada(dataReservas, route.params.nombreRecurso, time )
+                            }
+
                         }}
                     >
                       <Text style={styles.hourButtonLabel}>
