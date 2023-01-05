@@ -1,22 +1,27 @@
 import React, {useState} from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
+import { StyleSheet, Text, TextInput, View, TouchableOpacity, Alert} from 'react-native';
 import { Calendar, LocaleConfig} from 'react-native-calendars';
 import moment from 'moment';
 
 import { Ionicons } from '@expo/vector-icons';
 
+const dataReservas = require('../archivos/reservasMaterialRealizadas.json');
+const dataMaxMaterial = require('../archivos/Materiales.json');
 
+console.log(dataMaxMaterial)
 // Función para reservar recurso (Pantalla 4)
 export default function ReservarRecurso({route, navigation}){
-
-  
-
   // Establecemos las constantes
   const {title} = route.params.nombreRecurso;
 
   const [time, setTime] = useState()
   const [day, setDay] = useState("datee");
   const [mode, setMode] = useState('day')
+  const [value, setValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(dataMaxMaterial.filter(item => item.title == route.params.nombreRecurso )[0]["cantidadMax"])
+  const [maxValueAct, setMaxValueAct] = useState(maxValue)
+
+
 
   const[globalMarkedDates, setGlobalMarkedDates] = useState({})
 
@@ -125,7 +130,10 @@ export default function ReservarRecurso({route, navigation}){
                   {timeSlots.map((time) => (
                     <TouchableOpacity style={styles.hourButton} key={time}
                         //onDateChange={(time) => this.setState({time})}
-                        onPress={() =>{ setTime(time) }}
+                        onPress={() =>{
+                            setTime(time)
+                            comprobarReservaHoraSeleccionada(dataReservas, route.params.nombreRecurso, time )
+                        }}
                     >
                       <Text style={styles.hourButtonLabel}>
                         {time} 
@@ -137,6 +145,39 @@ export default function ReservarRecurso({route, navigation}){
                     
 
                 </View>
+
+                {!route.params.instalacion &&
+                <View style={styles.cantidadRow}>
+                <>
+                      <View style={styles.cantidadRow}>
+                          <TouchableOpacity style = {styles.buttonRes}
+                            onPress={() => {if(value > 1){
+                              setValue(value - 1)
+                              }}
+                            }
+                          >
+                            <Text style={styles.textButton}>  -  </Text>
+                          </TouchableOpacity>
+                          <TextInput
+                            style={styles.cantidadTextInput}
+                            value={value.toString()}
+                            onChangeText={text => setValue(parseInt(text))}
+                            keyboardType='numeric'
+                          />
+                          <TouchableOpacity style={styles.buttonSum}
+                            onPress={() =>
+                              {if (value < maxValue){
+                                  setValue(value + 1)
+                              }
+                            }}
+                          >
+                            <Text style={styles.textButton}>  +  </Text>
+                          </TouchableOpacity>
+                      </View>
+                      <Text>   Cantidad máxima: {maxValueAct}</Text>
+                      </>
+                </View>
+                }
 
                 <TouchableOpacity 
                     
@@ -168,8 +209,8 @@ export default function ReservarRecurso({route, navigation}){
     function añadirInstalacion(nombre, dia, hora){
       console.log("Añadiendo instalacion...")
       
-      reservasActuales = route.params.datosUsuario['reservasInstalaciones']
-      numReservas = reservasActuales.length
+      var reservasActuales = route.params.datosUsuario['reservasInstalaciones']
+      var numReservas = reservasActuales.length
       console.log(numReservas)
 
       reservasActuales[numReservas] = {}
@@ -189,12 +230,12 @@ export default function ReservarRecurso({route, navigation}){
 
       console.log(hora)
       console.log(Number(hora.split(":")[0])+1)
-      reservasActuales = route.params.datosUsuario['reservasMaterial']
-      numReservas = reservasActuales.length
+      var reservasActuales = route.params.datosUsuario['reservasMaterial']
+      var numReservas = reservasActuales.length
       console.log(numReservas)
 
       reservasActuales[numReservas] = {}
-      reservasActuales[numReservas]['Cantidad'] = 33  //TODO
+      reservasActuales[numReservas]['Cantidad'] = value  //TODO
       reservasActuales[numReservas]['Dia'] = dia
       reservasActuales[numReservas]['Hora'] = hora+"-"+(Number(hora.split(":")[0])+1)+":"+hora.split(":")[1]
       reservasActuales[numReservas]['Material'] = nombre
@@ -204,6 +245,20 @@ export default function ReservarRecurso({route, navigation}){
 
       delete route.params.nombreRecurso
       delete route.params.instalacion
+    }
+
+    function comprobarReservaHoraSeleccionada(data,nombre,time){
+        console.log(time)
+       let cont = 0
+       for (let i in data){
+        for (let j in data[i]){
+            if (data[i][j]["Material"] == nombre && data[i][j]["Hora"].split("-")[0] == time && data[i][j]["Dia"] == day ){
+                cont += data[i][j]["Cantidad"]
+                //setMaxValue(maxValue - data[i][j]["Cantidad"])
+             }
+        }
+       }
+       setMaxValueAct(maxValue - cont)
     }
 }  
  
@@ -284,6 +339,26 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     color: 'white'
   },
+  buttonSum:{
+    backgroundColor: "green",
+  },
+  buttonRes:{
+    backgroundColor: "red",
+  },
+  textButton:{
+    textAlign: 'center',
+    color: 'white'
+  },
+  cantidadTextInput:{
+    width: 50,
+    textAlign: 'center',
+
+  },
+   cantidadRow: {
+      flexDirection: "row",
+      alignSelf:"center"
+   }
+
 });
 
   
