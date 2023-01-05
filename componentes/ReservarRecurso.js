@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Alert} from 'react-native';
 import { Calendar, LocaleConfig} from 'react-native-calendars';
 import moment from 'moment';
-//import DateTimePicker from '@react-native-community/datetimepicker'
 
 
 // Función para reservar recurso (Pantalla 4)
@@ -10,10 +9,10 @@ export default function ReservarRecurso({route, navigation}){
 
   // Establecemos las constantes
   const {title} = route.params;
-
-  const [time, setTime] = useState()
+  const [selected, setSelected] = useState(null);
   const [day, setDay] = useState("datee");
-  const [mode, setMode] = useState('day')
+  
+  
 
   const[globalMarkedDates, setGlobalMarkedDates] = useState({})
 
@@ -24,32 +23,20 @@ export default function ReservarRecurso({route, navigation}){
     serviceDate = serviceDate.format("DD.MM.YYYY");
     setGlobalMarkedDates(markedDates)
   };
-
-  // TODO: Creo que las dos funciones siguientes no sirven para nada
-  const onChange = (event, selectedDate) => {
-    const currentDay = selectedDate || day;
-    setDay(currentDay);
-
-    let tempDate = new Date(currentDay);
-    let fDate =tempDate.getDay();
-    console.log(fDate)
-  }
   
-  const showMode = (currentMode) => {
-   setMode(currentMode);
-  }
+  
 
   // Configuración del calendario
   const [timeSlots, setTimeSlots] = React.useState([]);
   const createTimeSlots = (fromTime, toTime) => {
-    let startTime = moment(fromTime, 'hh:mm')
-    let endTime = moment(toTime, 'hh:mm')
+    let startTime = moment(fromTime, 'HH:mm')
+    let endTime = moment(toTime, 'HH:mm')
     if (endTime.isBefore(startTime)){
       endTime.add(1, 'day');
     }
     let arr = [];
     while (startTime <= endTime) {
-      arr.push(new moment(startTime).format('hh:mm'));
+      arr.push(new moment(startTime).format('HH:mm'));
       startTime.add(60, 'minutes');
     }
     return arr;
@@ -63,6 +50,7 @@ export default function ReservarRecurso({route, navigation}){
        return(
         <View >
             <Text style={styles.recursoName}>{title}</Text>
+
                <Calendar style={[styles.calendar]}
                
 
@@ -84,11 +72,20 @@ export default function ReservarRecurso({route, navigation}){
                
                 <View style={styles.hourRow}>
                   {timeSlots.map((time) => (
-                    <TouchableOpacity style={styles.hourButton}
-                        onDateChange={(time) => this.setState({time})}
-                        onPress={() =>{setTime(time) }} 
+                    <TouchableOpacity 
+                        key={time}
+                        //onDateChange={(time) => this.setState({time})}
+                        onPress={() =>{console.log(time) 
+                                       //setTime(time) 
+                                       setSelected(time)
+                                      }}
+                                      style={[
+                                        styles.hourButton,
+                                        time === selected && styles.hourSelected
+                                      ]}
                     >
-                      <Text style={styles.hourButtonLabel}>
+                      <Text style={[styles.hourButtonLabel, time === selected && styles.hourSelectedLabel
+                                      ]}>
                         {time} 
                       </Text>
 
@@ -195,6 +192,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     color: 'white'
   },
+  
+  
 });
 
   
@@ -221,5 +220,3 @@ const styles = StyleSheet.create({
 };
 LocaleConfig.defaultLocale = 'fr';
  
-
-
