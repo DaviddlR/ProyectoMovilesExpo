@@ -75,6 +75,7 @@ class MisReservasMaterial extends Component {
                           {text: 'Cancelar',onPress: () => console.log("Cancel Pressed"),style: "cancel"},
                           {text:'OK',onPress: () => {
                             this.setState({data: this.state.data.filter(item => item.id !== id)})
+                            this.props.route.params.datosUsuario['reservasMaterial'] = this.props.route.params.datosUsuario['reservasMaterial'].filter(item => item.id !== id)
                             console.log("Cancelando...")
                           }
                             

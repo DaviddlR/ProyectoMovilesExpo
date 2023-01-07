@@ -3,8 +3,8 @@
 	{
 	 "id": 1,
 	 "Lugar":"Biblioteca",
-	 "Hora": "09:30-10:30",
-	 "Dia": "20/01/2022"
+	 "Hora": "09:00-10:00",
+	 "Dia": "20/1/2022"
 	}
     ],
     "mperez@gmail.com":[{
@@ -15,19 +15,19 @@
 	},{
 	 "id": 2,
 	 "Lugar":"Pista Exterior 1",
-	 "Hora": "08:30-09:30",
+	 "Hora": "08:00-09:00",
 	 "Dia": "20/12/2023"
 	}],
     "marodri@gmail.com":[{
 	 "id": 1,
 	 "Lugar":"Sala Ordenadores",
-	 "Hora": "13:30-14:30",
-	 "Dia": "19/01/2022"
+	 "Hora": "13:00-14:00",
+	 "Dia": "19/1/2022"
 	}],
     "ahmedali@gmail.com":[{
 	 "id": 1,
 	 "Lugar":"Biblioteca",
-	 "Hora": "09:30-10:30",
-	 "Dia": "20/01/2022"
+	 "Hora": "09:00-10:00",
+	 "Dia": "20/1/2023"
 	}]
 }
