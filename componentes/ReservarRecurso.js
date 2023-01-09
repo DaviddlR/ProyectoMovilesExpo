@@ -105,7 +105,7 @@ export default function ReservarRecurso({route, navigation}){
 
     return(
       <View >
-          <Text style={styles.recursoName}>{title}</Text>
+          <Text style={styles.recursoName}>${title}</Text>
               <Calendar style={[styles.calendar]}
               
 
@@ -401,8 +401,8 @@ const styles = StyleSheet.create({
   
  recursoName: {
     textAlign: "center",
-    fontSize: 16,
-    color: 'white',
+    fontSize: 26,
+    color: 'black',
     fontWeight: 'bold',
   },
 

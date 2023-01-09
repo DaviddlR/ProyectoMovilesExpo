@@ -46,16 +46,32 @@ class MisReservasMaterial extends Component {
     }
 
     validarFecha(data){
-       let dataAux = data
-         for (let i = dataAux.length-1; i>=0; i--){
-              var currentDate = new Date()
-              var reservaDate = new Date(""+dataAux[i]["Dia"].split('/')[2]+"-"+dataAux[i]["Dia"].split('/')[1]+"-"+dataAux[i]["Dia"].split('/')[0]+"T"+dataAux[i]["Hora"].split('-')[1]+":00.000Z")
-              if (reservaDate < currentDate){
-               dataAux.splice(i,1)
-              }
+      let dataAux = data
+        for (let i = dataAux.length-1; i>=0; i--){
+             var currentDate = new Date()
+             let stringDia= ""
+             let stringMes = ""
+             console.log("----------------", dataAux[i]["Dia"].split('/')[1].length)
+             if (dataAux[i]["Dia"].split('/')[1].length == 1){
+              stringMes = "-0"+dataAux[i]["Dia"].split('/')[1];
+            } else {
+              stringMes = "-"+dataAux[i]["Dia"].split('/')[1]
+            }
 
-         }
-         return dataAux
+
+            if (dataAux[i]["Dia"].split('/')[0].length == 1){
+              stringDia = "-0"+dataAux[i]["Dia"].split('/')[0];
+            } else {
+              stringDia = "-"+dataAux[i]["Dia"].split('/')[0]
+            }
+
+             var reservaDate = new Date(stringDate =""+dataAux[i]["Dia"].split('/')[2]+ stringMes + stringDia +"T"+dataAux[i]["Hora"].split('-')[1]+":00.000Z")
+             if (reservaDate < currentDate){
+              dataAux.splice(i,1)
+             }
+
+        }
+        return dataAux
     }
 
 
