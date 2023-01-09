@@ -34,9 +34,9 @@ const Materiales =({navigation}) => {
 
 
             <View style ={styles.row}>
-               <TouchableOpacity style={styles.midButton} >
+               <View style={styles.midButton} >
                    <Text style ={styles.midText}>Reservar</Text>
-               </TouchableOpacity>
+               </View>
                
                <DropDownMenu />
            </View>
