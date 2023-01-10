@@ -38,7 +38,13 @@ const Instalaciones =({navigation}) => {
                         
                >
                    <Text style ={styles.midText}>Reservar</Text>
+                   <View style={styles.midButton} 
+                        
+               >
+                   <Text style ={styles.midText}>Materiales</Text>
                </View>
+               </View>
+               
                
                <DropDownMenu />
 
