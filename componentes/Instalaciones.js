@@ -24,32 +24,32 @@ const Instalaciones =({navigation, route}) => {
     return(
         <View>
             <View style ={styles.row}>
-               <TouchableOpacity style={styles.rButton}
+               <View style={styles.headButton}
                        >
-                  <Text style ={styles.rText}>Reservar</Text>
-               </TouchableOpacity>
+                  <Text style ={styles.headText}>Reservar</Text>
+               </View>
 
-               <TouchableOpacity style={styles.rButton}
+               <TouchableOpacity style={styles.headButton}
                onPress={() => navigation.navigate('MisReservasInstalaciones',
                          //{'usuario':route.params.datosUsuario['usuario']}
                          route.params
                          )}
                        >
-                  <Text style ={styles.rText}>Mis reservas</Text>
+                  <Text style ={styles.headText}>Mis reservas</Text>
                </TouchableOpacity>
             </View>
 
 
             <View style ={styles.row}>
-               <TouchableOpacity style={styles.midButton} 
+               <View style={styles.midButton} 
                         
                >
                    <Text style ={styles.midText}>Reservar</Text>
-               </TouchableOpacity>
-               <TouchableOpacity style={styles.midButton}
+               </View>
+               <View style={styles.midButton}
                            >
                    <Text style ={styles.midText}>Instalaciones</Text>
-               </TouchableOpacity>
+               </View>
 
                <DropDownMenu params={route.params} misReservas={false} />
 
@@ -123,35 +123,17 @@ midText: {
   fontSize: 16
 },
 
-rText: {
+headText: {
   color: 'white',
   fontSize: 20
 },
 
-rButton: {
+headButton: {
   flex: 1,
   height: 50,
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: '#02366B'
 },
-AppName: {
-  textAlign: "center",
-  marginBottom: 10,
-  fontSize: 26,
-  color: 'white',
-  fontWeight: 'bold',
-  left: 140
-},
-Arrow: {
-    color: 'white',
-     fontSize: 40
-},
-headLabelContainer:{
-    height: 60,
-    backgroundColor: '#003060',
-    padding: 10,
-    flexDirection: 'row'
-}
 })
 export default Instalaciones 
