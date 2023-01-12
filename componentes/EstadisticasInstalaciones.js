@@ -99,6 +99,7 @@ class MisReservasInstalaciones extends Component {
 
         return(
             <View>
+                <Text style={styles.recursoName}>Estadísticas {this.props.route.params.nombreRecurso}</Text>
                 <FlatList
                     data={this.state.data}
                     renderItem={renderItem}
@@ -126,6 +127,13 @@ const styles = StyleSheet.create({
       marginHorizontal: 16,
       flexDirection: 'row'
     },
+    recursoName: {
+        textAlign: "center",
+        fontSize: 26,
+        color: 'black',
+        fontWeight: 'bold',
+        backgroundColor: '#DDF4FF',
+      },
     itemSeparator: {
       height: 0.5,
       width: '100%',

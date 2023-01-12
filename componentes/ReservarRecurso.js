@@ -15,12 +15,12 @@ console.log(dataMaxMaterial)
 export default function ReservarRecurso({route, navigation}){
   // Establecemos las
   var maxValueMaterial = !route.params.instalacion ? dataMaxMaterial.filter(item => item.title == route.params.nombreRecurso )[0]["cantidadMax"] : 0
-  const {title} = route.params.nombreRecurso;
+  const title = route.params.nombreRecurso;
 
   const [time, setTime] = useState("hora_no_inicializada")
   const [day, setDay] = useState("fecha_no_inicializada");
   const [mode, setMode] = useState('day')
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
   const [maxValue, setMaxValue] = useState(maxValueMaterial)
   const [maxValueAct, setMaxValueAct] = useState(maxValue)
 
@@ -105,7 +105,7 @@ export default function ReservarRecurso({route, navigation}){
 
     return(
       <View >
-          <Text style={styles.recursoName}>${title}</Text>
+          <Text style={styles.recursoName}>Reservar {title}</Text>
               <Calendar style={[styles.calendar]}
               
 
@@ -115,12 +115,34 @@ export default function ReservarRecurso({route, navigation}){
                 display='defualt'
                 dateFormat="dayofweek day month"
                 onDayPress={day =>{
-                  // IMPORTANTE: Es posible que haya que modificar el formato de la fecha
-                  console.log(day)
-                  setTime("hora_no_inicializada")
-                  setMaxValueAct(maxValue)
-                  setDay(day['day'] + "/" + day['month'] + "/" + day['year']) 
-                  getSelectedDayEvents(day.dateString);
+                  console.log("Pulsando dia")
+                  stringMes = ""
+                  stringDia = ""
+                  console.log(typeof day['month'])
+                  if (day['month'] < 10){
+                    stringMes = "-0"+day['month'];
+                  } else {
+                    stringMes = "-"+day['month']
+                  }
+                  if (day['day'] < 10){
+                    stringDia = "-0"+day['day'];
+                  } else {
+                    stringDia = "-"+day['day']
+                  }
+                  var currentDate = new Date()
+                  var reservaDate = new Date(""+day['year']+ stringMes + stringDia +"T"+"00:00:00.000Z")
+                  console.log(currentDate)
+                  console.log(reservaDate)
+                  if (reservaDate < currentDate){
+                    alertar("Fecha seleccionada Incorrecta", "La fecha seleccionada no puede ser anterior a la fecha actual")
+                  } else {
+                      // IMPORTANTE: Es posible que haya que modificar el formato de la fecha
+                      console.log(day)
+                      setTime("hora_no_inicializada")
+                      setMaxValueAct(maxValue)
+                      setDay(day['day'] + "/" + day['month'] + "/" + day['year'])
+                      getSelectedDayEvents(day.dateString);
+                  }
                 }
                 }
                 markedDates = {globalMarkedDates}
@@ -174,7 +196,12 @@ export default function ReservarRecurso({route, navigation}){
                         <TextInput
                           style={styles.cantidadTextInput}
                           value={value.toString()}
-                          onChangeText={text => setValue(parseInt(text))}
+                          onChangeText={text => {
+                              const numberText = parseInt(text);
+                              if (numberText >= 1 && numberText <= maxValueAct) {
+                                setValue(numberText);
+                              }
+                            }}
                           keyboardType='numeric'
                         />
                         <TouchableOpacity style={styles.buttonSum}
@@ -404,6 +431,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     color: 'black',
     fontWeight: 'bold',
+    backgroundColor: '#DDF4FF',
   },
 
   hourRow: {
