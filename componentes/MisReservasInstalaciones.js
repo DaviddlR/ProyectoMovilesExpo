@@ -120,28 +120,28 @@ class MisReservasInstalaciones extends Component {
         return(
             <View>
                 <View style ={styles.row}>
-                    <TouchableOpacity style={styles.rButton}
+                    <TouchableOpacity style={styles.headButtonNoSeleccionado}
                     onPress={() => this.props.navigation.navigate('Instalaciones',
                     this.props.route.params
                     )}
                             >
-                      <Text style ={styles.rText}>Reservar</Text>
+                      <Text style ={styles.headText}>Reservar</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.rButton}
+                    <View style={styles.headButtonSeleccionado}
                             >
-                      <Text style ={styles.rText}>Mis reservas</Text>
-                    </TouchableOpacity>
+                      <Text style ={styles.headText}>Mis reservas</Text>
+                    </View>
                 </View>
 
 
                 <View style ={styles.row}>
-                    <TouchableOpacity style={styles.midButton} >
+                    <View style={styles.midButton} >
                         <Text style ={styles.midText}>Reservas</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.midButton}
+                    </View>
+                    <View style={styles.midButton}
                                 >
                         <Text style ={styles.midText}>Instalaciones</Text>
-                    </TouchableOpacity>
+                    </View>
 
                     <DropDownMenu params={this.props.route.params} misReservas={true}/>
                 </View>
@@ -196,36 +196,48 @@ const styles = StyleSheet.create({
      fontSize: 17,
     },
     row:{
-                        flexDirection: 'row'
-                      },
+      flexDirection: 'row'
+    },
 
-                      midButton: {
-                        flex: 1,
-                        height: 30,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#DDF4FF',
-                        borderwidth: 4,
-                        borderColor: 'black',
-                      },
+    midButton: {
+      flex: 1,
+      height: 30,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#DDF4FF',
+      borderwidth: 4,
+      borderColor: 'black',
+    },
 
-                      midText: {
-                        color: 'black',
-                        fontSize: 16
-                      },
+    midText: {
+      color: 'black',
+      fontSize: 16
+    },
 
-                      rText: {
-                        color: 'white',
-                        fontSize: 20
-                      },
+    headText: {
+      color: 'white',
+      fontSize: 20
+    },
 
-                      rButton: {
-                        flex: 1,
-                        height: 50,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#02366B'
-                      }
+    headButtonSeleccionado: {
+      flex: 1,
+      height: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#02366B',
+      borderBottomWidth: 5,
+      borderColor: '#68BBE3'
+    },
+    
+    headButtonNoSeleccionado: {
+      flex: 1,
+      height: 50,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#02366B',
+      borderBottomWidth: 5,
+      borderColor: '#02366B'
+    },
 
   });
 

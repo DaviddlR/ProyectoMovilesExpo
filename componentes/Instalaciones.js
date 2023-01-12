@@ -24,12 +24,13 @@ const Instalaciones =({navigation, route}) => {
     return(
         <View>
             <View style ={styles.row}>
-               <View style={styles.headButton}
+               <View style={styles.headButtonSeleccionado}
                        >
                   <Text style ={styles.headText}>Reservar</Text>
+
                </View>
 
-               <TouchableOpacity style={styles.headButton}
+               <TouchableOpacity style={styles.headButtonNoSeleccionado}
                onPress={() => navigation.navigate('MisReservasInstalaciones',
                          //{'usuario':route.params.datosUsuario['usuario']}
                          route.params
@@ -128,12 +129,31 @@ headText: {
   fontSize: 20
 },
 
-headButton: {
+headButtonSeleccionado: {
   flex: 1,
   height: 50,
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#02366B'
+  backgroundColor: '#02366B',
+  borderBottomWidth: 5,
+  borderColor: '#68BBE3'
 },
+
+headButtonNoSeleccionado: {
+  flex: 1,
+  height: 50,
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#02366B',
+  borderBottomWidth: 5,
+  borderColor: '#02366B'
+},
+
+miniBarra: {
+  flex: 0.1,
+  paddingTop: 1,
+  height: 50,
+  backgroundColor: 'red'
+}
 })
 export default Instalaciones 
