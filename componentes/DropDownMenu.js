@@ -2,6 +2,7 @@ import React, { useState, useRef } from 'react';
 import { Text, StyleSheet, TouchableOpacity, SafeAreaView, Modal, Animated, Easing} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
+import { AntDesign } from '@expo/vector-icons';
 
 const DropDownMenu = ({params, misReservas}) => {
     const navigation = useNavigation();
@@ -48,7 +49,7 @@ const DropDownMenu = ({params, misReservas}) => {
             useNativeDriver:true,
             duration:200,
             easing:Easing.linear
-        }).start(()=> to == 0 && setVisible(false));
+        }).start(()=> (to == 0 ? setVisible(false) : null));
     }
 
 
@@ -56,8 +57,13 @@ const DropDownMenu = ({params, misReservas}) => {
         
         <>
         
-            <TouchableOpacity onPress={() => resizeBox(1)}>
-                <Text>icon</Text>
+            <TouchableOpacity style={styles.icon}
+                              onPress={() => resizeBox(1)}>
+                <Text> 
+                   <AntDesign name="down" size={12} color="black" 
+                                          style={{ backgroundColor: '#DDF4FF'
+                                                   }} />
+                </Text>
             </TouchableOpacity>
         
             <Modal transparent visible={visible}>
@@ -68,12 +74,12 @@ const DropDownMenu = ({params, misReservas}) => {
                        {options.map((opcion, i)=>(
                             <TouchableOpacity style={[styles.popupButton,{borderBottomWidth: i == options.length - 1 ? 0 : 1}]}
                                         key={i}
-                                        onPress={() =>
+                                        onPress={() => {
                                             // Comprobamos a dónde quiere ir el usuario
                                             comprobarBotonDropDown(opcion.id)
                                             
                                             
-                                        }
+                                        }}
                                         
                                         >
                                 <Text style={styles.popupText}>{opcion.title}</Text>
@@ -114,6 +120,16 @@ const styles = StyleSheet.create({
     popupText:{
         color: 'black',
         fontSize: 16
-    }
+    },
+    icon: {
+        height: 30,
+        width: 40,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        backgroundColor: '#DDF4FF'
+    },
+
 })
 export default DropDownMenu
