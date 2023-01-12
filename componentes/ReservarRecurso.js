@@ -13,7 +13,8 @@ const dataReservasInstalaciones = require('../archivos/reservasInstalacionesReal
 console.log(dataMaxMaterial)
 // Función para reservar recurso (Pantalla 4)
 export default function ReservarRecurso({route, navigation}){
-  // Establecemos las
+
+  // Establecemos las variables globales
   var maxValueMaterial = !route.params.instalacion ? dataMaxMaterial.filter(item => item.title == route.params.nombreRecurso )[0]["cantidadMax"] : 0
   const title = route.params.nombreRecurso;
 
@@ -23,6 +24,8 @@ export default function ReservarRecurso({route, navigation}){
   const [value, setValue] = useState(1);
   const [maxValue, setMaxValue] = useState(maxValueMaterial)
   const [maxValueAct, setMaxValueAct] = useState(maxValue)
+
+  const [selected, setSelected] = useState(null);
 
 
   const[globalMarkedDates, setGlobalMarkedDates] = useState({})
@@ -34,20 +37,6 @@ export default function ReservarRecurso({route, navigation}){
     serviceDate = serviceDate.format("DD.MM.YYYY");
     setGlobalMarkedDates(markedDates)
   };
-
-  // TODO: Creo que las dos funciones siguientes no sirven para nada
-  const onChange = (event, selectedDate) => {
-    const currentDay = selectedDate || day;
-    setDay(currentDay);
-
-    let tempDate = new Date(currentDay);
-    let fDate =tempDate.getDay();
-    console.log(fDate)
-  }
-  
-  const showMode = (currentMode) => {
-   setMode(currentMode);
-  }
 
   // Configuración del calendario
   const [timeSlots, setTimeSlots] = React.useState([]);
@@ -151,7 +140,8 @@ export default function ReservarRecurso({route, navigation}){
               
               <View style={styles.hourRow}>
                 {timeSlots.map((hora) => (
-                  <TouchableOpacity disabled={hayReserva(dataReservas, dataReservasInstalaciones, route.params.nombreRecurso, hora)} style={estilarBoton()} key={hora}
+                  // Creamos los botones. Desactivamos aquellos para los que haya reservas
+                  <TouchableOpacity disabled={hayReserva(dataReservas, dataReservasInstalaciones, route.params.nombreRecurso, hora)} key={hora}
                           
 
                       // Pulsa el botón de la hora
@@ -160,15 +150,25 @@ export default function ReservarRecurso({route, navigation}){
                         // Comprobamos si ha seleccionado un día
                         if(day == "fecha_no_inicializada"){
                           alertar("Selecciona un día", "Antes de seleccionar la hora, debes escoger un día")
-                        // Comprobamos si ya hay una reserva para ese día y hora
+
                         } else {
                           setTime(hora)
+
+                          // Ajustamos el estilo del botón
+                          setSelected(hora)
+
+                          // Comprobamos si ya hay una reserva para ese día y hora en caso de que sea un material (puede haber materiales libres que aún se pueden reservar)
                           if (!route.params.instalacion){
                             comprobarReservaHoraSeleccionada(dataReservas, route.params.nombreRecurso, hora )
                           }
                         } 
 
                       }}
+
+                      style={[
+                        estilarBoton(),
+                        hora === selected && styles.hourSelected
+                      ]}
                   >
                     <Text style={styles.hourButtonLabel}>
                       {hora} 
