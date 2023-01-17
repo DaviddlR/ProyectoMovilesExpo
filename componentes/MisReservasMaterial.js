@@ -51,7 +51,6 @@ class MisReservasMaterial extends Component {
              var currentDate = new Date()
              let stringDia= ""
              let stringMes = ""
-             console.log("----------------", dataAux[i]["Dia"].split('/')[1].length)
              if (dataAux[i]["Dia"].split('/')[1].length == 1){
               stringMes = "-0"+dataAux[i]["Dia"].split('/')[1];
             } else {
@@ -98,7 +97,7 @@ class MisReservasMaterial extends Component {
                           }
                       ]
                     )}>
-                    <Text> Cancelar </Text>
+                    <Text style={styles.colorCancel}> Cancelar </Text>
                 </TouchableOpacity>
             </View>
         );
@@ -186,10 +185,16 @@ const styles = StyleSheet.create({
       fontSize: 17,
     },
     cancelButton: {
-     position: 'absolute',
-     backgroundColor: 'red',
-     right: '5%',
-     top: '60%' },
+      position: 'absolute',
+      backgroundColor: 'red',
+      right: '5%',
+      top: '60%' },
+
+      colorCancel:{
+        color: 'white',
+        fontSize: 17,
+       },
+
      row:{
         flexDirection: 'row'
       },

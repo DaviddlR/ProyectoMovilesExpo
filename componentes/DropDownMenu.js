@@ -19,8 +19,6 @@ const DropDownMenu = ({params, misReservas}) => {
 
     
     function comprobarBotonDropDown (options){
-        console.log("Desde dropdown:  ", params)
-        console.log(misReservas)
         if(options == 1){
                 console.log("Navegacion a instalaciones")
                 if(misReservas){

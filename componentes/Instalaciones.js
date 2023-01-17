@@ -60,7 +60,6 @@ const Instalaciones =({navigation, route}) => {
             <FlatList 
                 data={data}
                 renderItem={({ item }) => {
-                    console.log('Item: ', item)
                       return (
                         <Item 
                           id={item.id} title={item.title} 

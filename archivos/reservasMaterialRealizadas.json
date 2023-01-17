@@ -2,9 +2,9 @@
     "Juan":[
 	{
 	 "id": 1,
-	 "Material":"Tablets",
+	 "Material":"Voleibol",
 	 "Hora": "09:00-10:00",
-	 "Dia": "20/1/2022",
+	 "Dia": "23/1/2023",
 	 "Cantidad": 10
 	}
     ],
@@ -25,7 +25,7 @@
 	 "id":1,
 	 "Material":"Ordenadores",
 	 "Hora": "13:00-14:00",
-	 "Dia": "19/1/2022",
+	 "Dia": "20/1/2023",
 	 "Cantidad": 8
 	}],
     "ahmedali@gmail.com":[{
@@ -33,6 +33,6 @@
 	 "Material":"Fútbol",
 	 "Hora": "09:00-10:00",
 	 "Dia": "20/1/2023",
-	 "Cantidad": 7
+	 "Cantidad": 15
 	}]
 }

@@ -104,10 +104,10 @@ export default function ReservarRecurso({route, navigation}){
                 display='defualt'
                 dateFormat="dayofweek day month"
                 onDayPress={day =>{
-                  console.log("Pulsando dia")
+                  
                   stringMes = ""
                   stringDia = ""
-                  console.log(typeof day['month'])
+                  
                   if (day['month'] < 10){
                     stringMes = "-0"+day['month'];
                   } else {
@@ -120,8 +120,6 @@ export default function ReservarRecurso({route, navigation}){
                   }
                   var currentDate = new Date()
                   var reservaDate = new Date(""+day['year']+ stringMes + stringDia +"T"+"00:00:00.000Z")
-                  console.log(currentDate)
-                  console.log(reservaDate)
                   if (reservaDate < currentDate){
                     alertar("Fecha seleccionada Incorrecta", "La fecha seleccionada no puede ser anterior a la fecha actual")
                   } else {
@@ -199,6 +197,7 @@ export default function ReservarRecurso({route, navigation}){
                           onChangeText={text => {
                               const numberText = parseInt(text);
                               if (numberText >= 1 && numberText <= maxValueAct) {
+                                
                                 setValue(numberText);
                               }
                             }}
@@ -206,7 +205,7 @@ export default function ReservarRecurso({route, navigation}){
                         />
                         <TouchableOpacity style={styles.buttonSum}
                           onPress={() =>
-                            {if (value < maxValue){
+                            {if (value < maxValueAct){
                                 setValue(value + 1)
                             }
                           }}

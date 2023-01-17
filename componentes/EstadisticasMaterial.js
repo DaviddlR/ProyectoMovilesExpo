@@ -50,7 +50,6 @@ class MisReservasMaterial extends Component {
 
     contarReservas(data, material) {
            let dataReturn = []
-           console.log(data)
            let cont = 0
            for (i in data){
             cont += 1
@@ -71,7 +70,6 @@ class MisReservasMaterial extends Component {
             }
 
            }
-           console.log(dataReturn)
 
            return dataReturn
         }

@@ -38,8 +38,6 @@ const dataSource = require('../archivos/reservasInstalacionesRealizadas.json');
 class MisReservasInstalaciones extends Component {
     constructor(props) {
         super(props);
-        console.log("Constructor MisReservasInstalaciones.js")
-        console.log("Parametros en reservas instalaciones: ", this.props.route.params);
         this.state = {
            //data: this.validarFecha(dataSource[this.props.route.params.usuario]),
            data: this.validarFecha(this.props.route.params.datosUsuario['reservasInstalaciones'])
@@ -52,7 +50,6 @@ class MisReservasInstalaciones extends Component {
              var currentDate = new Date()
              let stringDia= ""
              let stringMes = ""
-             console.log("----------------", dataAux[i]["Dia"].split('/')[1].length)
              if (dataAux[i]["Dia"].split('/')[1].length == 1){
               stringMes = "-0"+dataAux[i]["Dia"].split('/')[1];
             } else {
@@ -186,15 +183,18 @@ const styles = StyleSheet.create({
     subtitle: {
       fontSize: 17,
     },
+    
     cancelButton: {
      position: 'absolute',
      backgroundColor: 'red',
      right: '5%',
      top: '60%' },
+
     colorCancel:{
      color: 'white',
      fontSize: 17,
     },
+
     row:{
       flexDirection: 'row'
     },

@@ -33,10 +33,6 @@ class MainMenu extends Component {
                 email:this.props.route.params.usuario,
         }
         
-        // console.log("AAAAAAAAa")
-        // console.log(this.props.route.params.reservasInstalaciones[0])
-        // console.log(this.props.route.params.reservasInstalaciones[0]['Lugar'])
-        // console.log("BBBBBBBBB")
         
         this.props.navigation.setOptions({
             headerLeft: () => (
@@ -105,7 +101,7 @@ class MainMenu extends Component {
 
 
     handleOnPress(idPantalla) {
-        console.log(idPantalla)
+        
         if(idPantalla == 1){
             console.log("Navegación hacia reservar")
             this.props.navigation.navigate('Instalaciones', this.props.route.params)
@@ -114,9 +110,6 @@ class MainMenu extends Component {
         if(idPantalla == 2){
             console.log("Navegación hacia guardias")
         }
-        
-        
-        //console.log(this.props.route.params.usuario)
           
     }
 }

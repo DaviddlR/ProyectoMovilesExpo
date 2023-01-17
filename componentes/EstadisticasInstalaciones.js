@@ -51,20 +51,17 @@ class MisReservasInstalaciones extends Component {
 
     contarReservas(data, instalacion) {
            let dataReturn = []
-           console.log(data)
            let cont = 0
            for (i in data){
             cont += 1
             let contarHoraReservas = 0
             for (j in data[i]){
                 if (data[i][j]["Lugar"] == instalacion){
-                    console.log("Verdad")
                     contarHoraReservas += Number(data[i][j]["Hora"].split("-")[1].split(":")[0])-Number(data[i][j]["Hora"].split("-")[0].split(":")[0])
                 }
             }
             dataReturn.push({id:cont, user: i, numHoras:contarHoraReservas})
            }
-           console.log(dataReturn)
 
            return dataReturn
         }
