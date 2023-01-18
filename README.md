@@ -1,12 +1,20 @@
 # README
 
-En este documento se incluye toda la información relacionada con la aplicación desarrollada, incluyendo cuáles son las pantallas creadas y cómo interactuar con las mismas
+En este documento se incluye toda la información relacionada con la aplicación desarrollada, incluyendo cuáles son las pantallas creadas y cómo interactuar con las mismas.
+
+## Acceso
+A continuación se incluye el enlace al código de la aplicación en Github. Adjuntamos también el enlace al proyecto Jira para la gestión de tareas. El primer Scum Master fue Estrella, el siguiente David y por último Saja.
+
+- Enlace a Github: https://github.com/DaviddlR/ProyectoMovilesExpo.git 
+- Enlace a Jira: https://mevr0003.atlassian.net/jira/software/projects/PM/boards/2 
 
 ## Equipo de trabajo
 El equipo de trabajo está formado por tres personas:
 - David de la Rosa de la Rosa (drr00025@red.ujaen.es)
 - María Estrella Vallecillo Rodríguez (mevr0003@red.ujaen.es)
 - Saja Saad Roomi Alshihmani (ssa00020@red.ujaen.es)
+
+Tal y como se aprecia en el proyecto Jira, los tres miembros del equipo hemos mantenido una carga de trabajo similar.
 
 ## Pantallas principales
 A continuación se describen las pantallas principales de la aplicación.
