@@ -1,0 +1,38 @@
+{
+    "Juan":[
+	{
+	 "id": 1,
+	 "Material":"Voleibol",
+	 "Hora": "09:00-10:00",
+	 "Dia": "23/1/2023",
+	 "Cantidad": 10
+	}
+    ],
+    "mperez@gmail.com":[{
+	 "id": 1,
+	 "Material":"Aros",
+	 "Hora": "12:00-13:00",
+	 "Dia": "16/1/2023",
+	 "Cantidad": 15
+	},{
+	 "id":2,
+	 "Material":"Conos",
+	 "Hora": "08:00-09:00",
+	 "Dia": "20/12/2022",
+	 "Cantidad": 20
+	}],
+    "marodri@gmail.com":[{
+	 "id":1,
+	 "Material":"Ordenadores",
+	 "Hora": "13:00-14:00",
+	 "Dia": "20/1/2023",
+	 "Cantidad": 8
+	}],
+    "ahmedali@gmail.com":[{
+	 "id": 1,
+	 "Material":"Fútbol",
+	 "Hora": "09:00-10:00",
+	 "Dia": "20/1/2023",
+	 "Cantidad": 15
+	}]
+}

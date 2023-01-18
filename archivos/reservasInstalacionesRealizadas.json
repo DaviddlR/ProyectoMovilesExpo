@@ -1,0 +1,33 @@
+{
+    "Juan":[
+	{
+	 "id": 1,
+	 "Lugar":"Biblioteca",
+	 "Hora": "09:00-10:00",
+	 "Dia": "25/1/2023"
+	}
+    ],
+    "mperez@gmail.com":[{
+	 "id": 1,
+	 "Lugar":"Gimnasio",
+	 "Hora": "12:00-13:00",
+	 "Dia": "16/12/2022"
+	},{
+	 "id": 2,
+	 "Lugar":"Pista Exterior 1",
+	 "Hora": "08:00-09:00",
+	 "Dia": "20/12/2023"
+	}],
+    "marodri@gmail.com":[{
+	 "id": 1,
+	 "Lugar":"Sala de ordenadores",
+	 "Hora": "13:00-14:00",
+	 "Dia": "23/1/2023"
+	}],
+    "ahmedali@gmail.com":[{
+	 "id": 1,
+	 "Lugar":"Biblioteca",
+	 "Hora": "09:00-10:00",
+	 "Dia": "20/1/2023"
+	}]
+}

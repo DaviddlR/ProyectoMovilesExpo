@@ -1,0 +1,33 @@
+[
+  { "id": 1,
+     "title": "Ordenadores",
+     "cantidadMax": 15,
+     "image": ""
+    
+    }, 
+    { "id": 2,
+     "title": "Aros",
+      "cantidadMax": 50,
+     "image": ""
+    
+    }, 
+    { "id": 3,
+     "title": "Fútbol",
+      "cantidadMax": 15,
+     "image": ""
+    
+    }, 
+    { "id": 4,
+     "title": "Voleibol",
+      "cantidadMax" : 15,
+     "image": ""
+    
+    }, 
+    { "id": 5,
+     "title": "Conos",
+      "cantidadMax": 50,
+     "image": ""
+    
+    }
+]
+    
