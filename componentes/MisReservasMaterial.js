@@ -8,33 +8,19 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   TouchableOpacity,
   Alert,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import DropDownMenu from './DropDownMenu'
 
 
 
 import  { Component } from 'react';
-import { Button} from 'react-native';
 import { FlatList } from "react-native-gesture-handler";
-
-const dataSource = require('../archivos/reservasMaterialRealizadas.json');
 
 class MisReservasMaterial extends Component {
     constructor(props) {

@@ -109,6 +109,7 @@ class MainMenu extends Component {
 
         if(idPantalla == 2){
             console.log("Navegación hacia guardias")
+            this.props.navigation.navigate('Guardias', this.props.route.params)
         }
           
     }

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, TextInput, View, TouchableOpacity, Alert} from 'react-native';
 import { Calendar, LocaleConfig} from 'react-native-calendars';
 import moment from 'moment';
@@ -20,7 +20,6 @@ export default function ReservarRecurso({route, navigation}){
 
   const [time, setTime] = useState("hora_no_inicializada")
   const [day, setDay] = useState("fecha_no_inicializada");
-  const [mode, setMode] = useState('day')
   const [value, setValue] = useState(1);
   const [maxValue, setMaxValue] = useState(maxValueMaterial)
   const [maxValueAct, setMaxValueAct] = useState(maxValue)
@@ -225,7 +224,7 @@ export default function ReservarRecurso({route, navigation}){
                     if(time == "hora_no_inicializada" || day == "fecha_no_inicializada"){
                       alertar("Error", "Debes escoger una fecha y hora")
                     } else {
-                      Alert.alert("Alerta","confirmanción de reserva del recurso " + route.params.nombreRecurso + " del usuario "+ route.params.datosUsuario['usuario'] +" el día "+ day + ", a la hora "+ time,[
+                      Alert.alert("Alerta","Confirmación de reserva del recurso " + route.params.nombreRecurso + " del usuario "+ route.params.datosUsuario['usuario'] +" el día "+ day + ", a la hora "+ time + ".",[
                         {text:'OK',onPress: () =>{
                           if(route.params.instalacion){
                               añadirInstalacion(route.params.nombreRecurso, day, time)
