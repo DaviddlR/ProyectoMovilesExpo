@@ -26,6 +26,7 @@ const dataSource = [
 
 class MainMenu extends Component {
 
+    // Constructor de la clase
     constructor(props) {
         super(props);
 
@@ -33,7 +34,7 @@ class MainMenu extends Component {
                 email:this.props.route.params.usuario,
         }
         
-        
+        // Parámetros de la cabecera
         this.props.navigation.setOptions({
             headerLeft: () => (
                 <TouchableOpacity onPress={()=>{this.props.navigation.navigate('Login')}}>
@@ -42,20 +43,19 @@ class MainMenu extends Component {
                         <Entypo name="log-out" size={40} color="white" />
                     </Text>
                 </TouchableOpacity>
-              //<Button onPress={() => this.props.navigation.navigate('MainMenu', {'usuario':"david"}) } title="Info"/>
+              
             ),
         });
-        //dataSource.push({id:2, title:this.props.route.params.usuario});
+        
         
     }
     
     
     render() {
 
+        // Función que representa el item de la lista
         const Item = ({ id, title }) => (
 
-            
-            
             <TouchableOpacity onPress={this.handleOnPress.bind(this, id)} style={styles.item}>
                 <Text style={styles.title}>
                     {id == 1? <AntDesign name="form" size={35} color="black" />: null }
@@ -64,16 +64,14 @@ class MainMenu extends Component {
                     {title}
                 </Text>
             </TouchableOpacity>
-
-            // <View style={styles.item}>
-            //   <Text style={styles.title}>{title}</Text>
-            // </View>
         );
 
+        // Función para renderizar el item
         const renderItem = ({ item }) => (
             <Item id={item.id} title={item.title} />
         );
 
+        // Separador establecido
         const separatorItem = () => {
             return (
                 <View style={styles.separator} />
@@ -88,18 +86,11 @@ class MainMenu extends Component {
                     keyExtractor={item => item.id}
                     ItemSeparatorComponent={separatorItem}
                 />
-
-                
-                {/* <Text> Menu principal </Text>  */}
-
-                {/* <TouchableOpacity onPress={this.handleOnPress.bind(this, "a")}>
-                    <Text >Quien ha iniciado sesión</Text>
-                </TouchableOpacity>  */}
             </View>
         );
     }
 
-
+    // Cuando se pulsa una opción, se llama a esta función
     handleOnPress(idPantalla) {
         
         if(idPantalla == 1){

@@ -1,41 +1,19 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
-  TouchableOpacity,
-  Alert,
   Image
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
 
 import  { Component } from 'react';
-import { Button} from 'react-native';
 import { FlatList } from "react-native-gesture-handler";
 
 const dataSource = require('../archivos/reservasMaterialRealizadas.json');
 import {ImagesUser} from '../archivos/userImages.js';
-const vari = require('../imgs/user.png')
 
 class MisReservasMaterial extends Component {
     constructor(props) {
@@ -48,6 +26,7 @@ class MisReservasMaterial extends Component {
         };
     }
 
+    // Función para contar las reservas asociadas al usuario
     contarReservas(data, material) {
            let dataReturn = []
            let cont = 0
@@ -74,6 +53,7 @@ class MisReservasMaterial extends Component {
            return dataReturn
         }
 
+        
     render() {
         const Item = ({ id, user, numHoras, unidades }) => (
                 <View style={styles.item}>

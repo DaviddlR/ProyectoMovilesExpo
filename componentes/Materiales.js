@@ -6,11 +6,11 @@ import DropDownMenu from './DropDownMenu';
 const Materiales =({navigation,route}) => {
 
     const Item = ({ title }) => (
-          <TouchableOpacity style={styles.instalacionsButton}
+        <TouchableOpacity style={styles.instalacionsButton}
           onPress={() => 
             navigation.navigate('ReservarRecurso', {'datosUsuario':{'usuario' : route.params.datosUsuario['usuario'], 'reservasInstalaciones' : route.params.datosUsuario['reservasInstalaciones'], 'reservasMaterial' : route.params.datosUsuario['reservasMaterial']}, 'nombreRecurso':title, 'instalacion': false})} >
               <Text style={styles.instalacionsText}>{title}</Text>               
-          </TouchableOpacity>  
+        </TouchableOpacity>  
       );
 
    
@@ -19,29 +19,29 @@ const Materiales =({navigation,route}) => {
 
     
             <View style ={styles.row}>
-               <View style={styles.headButtonSeleccionado}
-                       >
-                  <Text style ={styles.headText}>Reservar</Text>
-               </View>
 
-               <TouchableOpacity style={styles.headButtonNoSeleccionado}
-               onPress={() => navigation.navigate('MisReservasMaterial',
-                                        route.params
-                                        )}
-                       >
-                  <Text style ={styles.headText}>Mis reservas</Text>
-               </TouchableOpacity>
+                <View style={styles.headButtonSeleccionado}>                       
+                  <Text style ={styles.headText}>Reservar</Text>
+                </View>
+
+                <TouchableOpacity style={styles.headButtonNoSeleccionado}
+                    onPress={() => navigation.navigate('MisReservasMaterial', route.params)}
+                >
+                    <Text style ={styles.headText}>Mis reservas</Text>
+                </TouchableOpacity>
             </View>
 
 
             <View style ={styles.row}>
+
                <View style={styles.midButton} >
                    <Text style ={styles.midText}>Reservar</Text>
                </View>
-               <View style={styles.midButton}
-                           >
+
+               <View style={styles.midButton}>
                    <Text style ={styles.midText}>Materiales</Text>
                </View>
+
                <DropDownMenu params={route.params} misReservas={false}/>
            </View>
           
@@ -49,7 +49,7 @@ const Materiales =({navigation,route}) => {
             <FlatList 
                 data={data}
                 renderItem={({ item }) => {
-                    console.log('Item: ', item)
+                    
                       return (
                     <Item 
                        id={item.id} title={item.title} 

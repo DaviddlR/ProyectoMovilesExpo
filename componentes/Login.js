@@ -1,6 +1,6 @@
 import { Component } from "react"
 
-import React, { useState } from 'react';
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,35 +8,28 @@ import {
   TextInput,
   TouchableOpacity,
   Image,
-  Button,
   Alert,
 } from 'react-native';
 
-// import dataInstalaciones from '../archivos/reservasInstalacionesRealizadas.json'
-// import dataMateriales from '../archivos/reservasMaterialRealizadas.json'
+
 
 class Login extends Component {
     
+    // Constructor de la clase
     constructor(props){
-      // Required step: always call the parent class' constructor
+      
       super(props);
 
       this.state = {
         email:"null",
         password:"null"
       }
-      // https://snack.expo.dev/ 
-      // this.props.navigation.setOptions({
-      //   headerRight: () => (
-      //     <Button onPress={() => this.props.navigation.navigate('MainMenu', {'usuario':"david"}) } title="Info"/>
-      //   ),
-      // });
+      
     }
     
     render() {
 
-        //const [email, setEmail] = useState('');
-        //const [password, setPassword] = useState('');
+        
         
         return (
             
@@ -74,7 +67,7 @@ class Login extends Component {
         );
     }
 
-
+    // Cuando se pulsa el botón para loguearse, hay que validar el formulario y comprobar que todo es correcto
     handleOnPress = () => {
       
       if(validarFormulario(this.state.email, this.state.password)){
@@ -88,7 +81,7 @@ class Login extends Component {
           [
             {
               text: "Aceptar",
-              //onPress: () => console.log("Ask me later pressed")
+              
             }
           ]
         )
@@ -103,7 +96,7 @@ class Login extends Component {
 
 
 
-
+// Funcion para conseguir los datos asociados al usuario
 function conseguirDatos(email){
   console.log("------------------------------")
   // Leemos los ficheros
@@ -122,26 +115,13 @@ function conseguirDatos(email){
   diccionario['datosUsuario']['reservasMaterial'] = dataMateriales[email]
 
   console.log(diccionario)
-  // console.log(dataInstalaciones[email][0])
-  // console.log(dataInstalaciones[email][0]['Dia'])
+  
 
   return diccionario
 }
 
-function validarFecha(data){
-  let dataAux = data
-  for (let i = dataAux.length-1; i>=0; i--){
-       var currentDate = new Date()
-       var reservaDate = new Date(""+dataAux[i]["Dia"].split('/')[2]+"-"+dataAux[i]["Dia"].split('/')[1]+"-"+dataAux[i]["Dia"].split('/')[0]+"T"+dataAux[i]["Hora"].split('-')[1]+":00.000Z")
-       if (reservaDate < currentDate){
-        console.log("Reserva Menor")
-        dataAux.splice(i,1)
-       }
 
-  }
-  return dataAux
-}
-
+// Función para validar los datos introducidos por el usuario
 function validarFormulario(email, contraseña){
 
   const customData = require('../archivos/Flogin.json');
@@ -153,8 +133,7 @@ function validarFormulario(email, contraseña){
       }
     }
   }
-  //console.log(customData)
-  //TODO: Comprobar si email y contraseña son válidos
+  
   return false;
 }
 

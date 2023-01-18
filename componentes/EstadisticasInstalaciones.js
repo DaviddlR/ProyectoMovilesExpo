@@ -1,42 +1,18 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
-  TouchableOpacity,
-  Alert,
   Image
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-
 import  { Component } from 'react';
-import { Button} from 'react-native';
 import { FlatList } from "react-native-gesture-handler";
 
 const dataSource = require('../archivos/reservasInstalacionesRealizadas.json');
 import {ImagesUser} from '../archivos/userImages.js';
-const ins = "Biblioteca"
-const vari = require('../imgs/user.png')
 
 class MisReservasInstalaciones extends Component {
     constructor(props) {
@@ -45,10 +21,11 @@ class MisReservasInstalaciones extends Component {
 
         this.state = {
            data: this.contarReservas(dataSource, this.props.route.params.nombreRecurso),
-           //data: this.contarReservas(dataSource,this.props.route.params.instalacion),
+           
         };
     }
 
+    // Función para contar las reservas asociadas al usuario
     contarReservas(data, instalacion) {
            let dataReturn = []
            let cont = 0

@@ -32,26 +32,16 @@ class Guardias extends Component {
       super(props);
 
       this.state = {
-        email:"null",
-        password:"null",
 
         dataGuardias: this.determinarGuardias()
       }
-      // https://snack.expo.dev/ 
-      // this.props.navigation.setOptions({
-      //   headerRight: () => (
-      //     <Button onPress={() => this.props.navigation.navigate('MainMenu', {'usuario':"david"}) } title="Info"/>
-      //   ),
-      // });
+      
     }
 
+    // Función para conseguir las guardias asociadas al usuario
     determinarGuardias(){
 
         var nombreUsuario = this.props.route.params.datosUsuario.usuario
-
-        console.log("################")
-        console.log(dataSource[nombreUsuario])
-        console.log(this.props.route.params.datosUsuario.usuario)
 
         let dataAux = dataSource[nombreUsuario]
         
@@ -87,7 +77,7 @@ class Guardias extends Component {
 
         const Item = ({ id, Clase, Hora, Dia }) => (
             //validarFecha(id, Lugar, Hora, Dia),
-            console.log( new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() < Dia ),
+            
             <View style={styles.item}>
                 <Text style={styles.title}>{Clase}</Text>
                 <Text style={styles.subtitle}> Dia: {Dia}</Text>
@@ -100,7 +90,7 @@ class Guardias extends Component {
 
         const renderItem = ({ item }) => (
             <Item id={item.id} Clase={item.Clase} Dia={item.Dia} Hora={item.Hora} />
-            //<Item id={1} Clase={"B1"} Dia={"item.Dia"} Hora={"item.Hora"} />
+            
 
         );
 
@@ -137,36 +127,6 @@ class Guardias extends Component {
 
         
 }
-
-
-
-
-function conseguirDatos(email){
-  console.log("------------------------------")
-  // Leemos los ficheros
-  let dataInstalaciones = require('../archivos/reservasInstalacionesRealizadas.json');
-  let dataMateriales = require('../archivos/reservasMaterialRealizadas.json');
-
-  console.log("instalaciones: ", dataInstalaciones)
-  console.log("materiales: ", dataMateriales)
-
-  // Creamos el diccionario
-  var diccionario = {}
-  diccionario['datosUsuario'] = {}
-  diccionario['datosUsuario']['usuario'] = email
-  //diccionario['datosUsuario']['reservasInstalaciones'] = validarFecha(dataInstalaciones[email])
-  diccionario['datosUsuario']['reservasInstalaciones'] = dataInstalaciones[email]
-  diccionario['datosUsuario']['reservasMaterial'] = dataMateriales[email]
-
-  console.log(diccionario)
-  // console.log(dataInstalaciones[email][0])
-  // console.log(dataInstalaciones[email][0]['Dia'])
-
-  return diccionario
-}
-
-
-
 
 
 export default Guardias

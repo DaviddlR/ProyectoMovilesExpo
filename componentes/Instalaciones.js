@@ -5,18 +5,15 @@ import DropDownMenu from './DropDownMenu'
 
 
 const Instalaciones =({navigation, route}) => {
-    console.log(route)
+    
     //const user = route.params.datosUsuario['usuario']
     const Item = ({ title, image }) => (
 
           <TouchableOpacity style={styles.instalacionsButton}
-          onPress={() => 
-              
-              //navigation.navigate('ReservarRecurso', {'usuario':route.params.datosUsuario['usuario'], 'nombreRecurso':title, 'instalacion': true})} >
-              //navigation.navigate('ReservarRecurso', añadirParametros(title, true))} >
-              navigation.navigate('ReservarRecurso', {'datosUsuario':{'usuario' : route.params.datosUsuario['usuario'], 'reservasInstalaciones' : route.params.datosUsuario['reservasInstalaciones'], 'reservasMaterial' : route.params.datosUsuario['reservasMaterial']}, 'nombreRecurso':title, 'instalacion': true})} >
-              <Image source={{image}} />
-              <Text style={styles.instalacionsText}>{title}</Text>    
+            onPress={() => 
+                navigation.navigate('ReservarRecurso', {'datosUsuario':{'usuario' : route.params.datosUsuario['usuario'], 'reservasInstalaciones' : route.params.datosUsuario['reservasInstalaciones'], 'reservasMaterial' : route.params.datosUsuario['reservasMaterial']}, 'nombreRecurso':title, 'instalacion': true})} >
+                <Image source={{image}} />
+                <Text style={styles.instalacionsText}>{title}</Text>    
 
           </TouchableOpacity>  
     );
@@ -31,24 +28,23 @@ const Instalaciones =({navigation, route}) => {
                </View>
 
                <TouchableOpacity style={styles.headButtonNoSeleccionado}
-               onPress={() => navigation.navigate('MisReservasInstalaciones',
+                  onPress={() => navigation.navigate('MisReservasInstalaciones',
                          //{'usuario':route.params.datosUsuario['usuario']}
                          route.params
                          )}
-                       >
+                  >
                   <Text style ={styles.headText}>Mis reservas</Text>
                </TouchableOpacity>
             </View>
 
 
             <View style ={styles.row}>
-               <View style={styles.midButton} 
-                        
-               >
+
+               <View style={styles.midButton}>
                    <Text style ={styles.midText}>Reservar</Text>
                </View>
-               <View style={styles.midButton}
-                           >
+
+               <View style={styles.midButton}>
                    <Text style ={styles.midText}>Instalaciones</Text>
                </View>
 

@@ -10,7 +10,6 @@ const dataMaxMaterial = require('../archivos/Materiales.json');
 
 const dataReservasInstalaciones = require('../archivos/reservasInstalacionesRealizadas.json')
 
-console.log(dataMaxMaterial)
 // Función para reservar recurso (Pantalla 4)
 export default function ReservarRecurso({route, navigation}){
 
@@ -122,8 +121,8 @@ export default function ReservarRecurso({route, navigation}){
                   if (reservaDate < currentDate){
                     alertar("Fecha seleccionada Incorrecta", "La fecha seleccionada no puede ser anterior a la fecha actual")
                   } else {
-                      // IMPORTANTE: Es posible que haya que modificar el formato de la fecha
-                      console.log(day)
+                      
+                      
                       setTime("hora_no_inicializada")
                       setMaxValueAct(maxValue)
                       setDay(day['day'] + "/" + day['month'] + "/" + day['year'])
@@ -276,8 +275,7 @@ export default function ReservarRecurso({route, navigation}){
     function añadirMaterial(nombre, dia, hora){
       console.log("Añadiendo material...")
 
-      console.log(hora)
-      console.log(Number(hora.split(":")[0])+1)
+      
       var reservasActuales = route.params.datosUsuario['reservasMaterial']
       var numReservas = reservasActuales.length
       console.log(numReservas)
@@ -297,7 +295,6 @@ export default function ReservarRecurso({route, navigation}){
 
     // Función para comprobar el número máximo de materiales que se pueden reservar
     function comprobarReservaHoraSeleccionada(data,nombre,time){
-        console.log(time)
        let cont = 0
        for (let i in data){
         for (let j in data[i]){
@@ -312,22 +309,15 @@ export default function ReservarRecurso({route, navigation}){
 
     // Fución para comprobar si ya hay una reserva para el día y hora seleccionados
     function hayReserva(dataMateriales, dataInstalaciones, nombre, hora){
-      //console.log(time)
-      // console.log("+++++++++++++")
-      // console.log(nombre)
-      // console.log(day)
-      // console.log(hora)
-      // console.log("----------------")
+      
 
       if(route.params.instalacion){
-        //console.log(dataInstalaciones)
+        
         // Comprobamos instalaciones
         for (let i in dataInstalaciones){
           for (let j in dataInstalaciones[i]){
-              // console.log(dataInstalaciones[i][j]["Lugar"])
-              // console.log(dataInstalaciones[i][j]["Dia"])
               if (dataInstalaciones[i][j]["Lugar"] == nombre && dataInstalaciones[i][j]["Dia"] == day && dataInstalaciones[i][j]["Hora"].split("-")[0] == hora ){
-                  console.log("//////////////////")
+                  
                   // Se ha localizado una reserva. Deshabilitamos botón
                   //setBotonDesactivado(false)
                   botonDesactivado = true
@@ -338,18 +328,11 @@ export default function ReservarRecurso({route, navigation}){
        }
       } else {
         // Comprobamos materiales
-        console.log("+++++++++++++")
-        console.log(maxValueAct)
         
-        console.log(nombre)
-        console.log(day)
-        console.log(hora)
-        console.log("----------------")
         let contador = 0
         for (let i in dataMateriales){
           for (let j in dataMateriales[i]){
-              console.log(dataMateriales[i][j]["Material"])
-              console.log(dataMateriales[i][j]["Dia"])
+              
               if (dataMateriales[i][j]["Material"] == nombre && dataMateriales[i][j]["Dia"] == day && dataMateriales[i][j]["Hora"].split("-")[0] == hora ){
                   // Se ha localizado una reserva
                   // Comprobamos si aún queda alguno disponible
@@ -357,8 +340,6 @@ export default function ReservarRecurso({route, navigation}){
                   if(contador >= maxValue){
                     botonDesactivado = true
                     return true
-                  } else {
-                    console.log("NOT /////////////7")
                   }
               }
           }
@@ -371,11 +352,9 @@ export default function ReservarRecurso({route, navigation}){
     // Función para estilar un botón como "activado" o "desactivado"
     function estilarBoton(){
       if(botonDesactivado){
-        console.log("BOTON DESACTIVADO")
         botonDesactivado = false
         return styles.hourButtonDesactivado
       } else {
-        console.log("BOTON ACTIVADO")
         return styles.hourButton
       }
       

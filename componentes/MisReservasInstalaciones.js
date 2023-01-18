@@ -8,32 +8,20 @@
 
 import React from 'react';
 import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  useColorScheme,
   View,
   TouchableOpacity,
   Alert,
 } from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+
 import DropDownMenu from './DropDownMenu'
 
 
 import  { Component } from 'react';
-import { Button} from 'react-native';
-import { FlatList } from "react-native-gesture-handler";
 
-const dataSource = require('../archivos/reservasInstalacionesRealizadas.json');
+import { FlatList } from "react-native-gesture-handler";
 
 class MisReservasInstalaciones extends Component {
     constructor(props) {
@@ -75,7 +63,7 @@ class MisReservasInstalaciones extends Component {
     render() {
         const Item = ({ id, Lugar, Hora, Dia }) => (
         //validarFecha(id, Lugar, Hora, Dia),
-        console.log( new Date().getDate()+'/'+(new Date().getMonth()+1)+'/'+new Date().getFullYear() < Dia ),
+        
         <View style={styles.item}>
             <Text style={styles.title}>{Lugar}</Text>
             <Text style={styles.subtitle}> Dia: {Dia}</Text>
